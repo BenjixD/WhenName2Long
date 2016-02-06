@@ -9,7 +9,7 @@ module.exports = function(passport){
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var loggedIn = logValue(req);
-  res.render('Home', { title: 'Home', status: loggedIn});
+  res.render('Home', { title: 'Home', user: req.user, status: loggedIn});
 });
 
 router.post('/', function(req, res, next) {
@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 router.get('/contactus', function(req, res) {
 	var loggedIn = logValue(req);
 	console.log(loggedIn);
-  res.render('contactus', { title: 'Contact Us', status: loggedIn});
+  res.render('contactus', { title: 'Contact Us', user: req.user, status: loggedIn});
 });
 
 
