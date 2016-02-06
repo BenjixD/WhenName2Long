@@ -135,6 +135,20 @@ router.get('/profile(/id/:id)?', LoggedIn, function(req, res) {
 		});
 	});
 
+router.get('/makeloan', function(req, res){
+
+	var int_type = ['Flat','Simple','Compound'];
+	var ann_type = ['Annuity', 'Annuity Due'];
+	var fix_int = [true, false];
+	var freq = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
+
+	res.render('newloan', { title: "Request Loan", 
+							it : int_type, 
+							at : ann_type, 
+							fi : fix_int,
+							fe : freq,
+							status: loggedIn});
+});
 
 router.get('/logout', function(req,res){
 	req.logout();
