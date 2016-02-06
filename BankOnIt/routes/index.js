@@ -96,6 +96,22 @@ router.post('/signup', passport.authenticate('signup-local', {
 	failureFlash: true
 }));
 
+router.post('/successlogin', function(req, res){
+
+});
+
+router.get('/successlogin', function(req,res){
+	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden' });
+});
+
+router.post('/successsignup', function(req, res){
+
+});
+
+router.get('/successsignup', function(req,res){
+	res.render('Successsignup', { title: 'GOOD JOB', username:'Jorden' });
+});
+
 	return router;
 };
 //module.exports = router;
