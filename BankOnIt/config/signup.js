@@ -3,15 +3,15 @@ var User = require('../Schemas/user.js');
 var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport){
+    console.log("signup module.exports");
 
 	passport.use('signup-local', new LocalStrategy({
-            firstname: 'fname',
-            lastname: 'lname',
-            email: 'email',
-            password: 'password',
+            usernameField : 'email',
+            passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, email, password, done) {
+            console.log("Attempt create user");
 
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
@@ -23,7 +23,7 @@ module.exports = function(passport){
                     }
                     // already exists
                     if (user) {
-                        console.log('User already exists with username: '+username);
+                        console.log('User already exists with username: ' + email);
                         return done(null, false, req.flash('message','User Already Exists'));
                     } else {
                         // if there is no user with that email
@@ -32,9 +32,9 @@ module.exports = function(passport){
 
                         // set the user's local credentials
                         newUser.email = email;
-                        newUser.password = password;
-                        newUser.firstName = '';
-                        newUser.lastName = '';
+                        newUser.password = createHash(password);
+                        newUser.firstName = req.param('firstName');
+                        newUser.lastName = req.param('lastName');
 
                         // save the user
                         newUser.save(function(err) {
