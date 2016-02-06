@@ -44,8 +44,34 @@
           </div>
           <div class="panel-heading">
             <h4 class="panel-title">
+              <img src="./images/carkey.png" alt="carkey" style="width:25px;height:25px;">
               <a data-toggle="collapse" href="#collapse2">Car Expense</a>   <!--NAMING-->
             </h4>
+          </div>
+
+          <div id="collapse2" class="panel-collapse collapse">
+            <!--<div class="panel-body">Panel Body</div>-->
+            <table class="table table-hover">
+              <thread>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Expected End Date</th>
+                </tr>
+              </thread>
+              <tbody>
+                <% for(var i=0; i<loans.length; i++) {%>
+                  <tr>
+                      <td><%= loans[i].name %></td>
+                      <td><%= loans[i].total %></td>
+                      <td><%= loans[i].currentBalance %></td>
+                      <td><%= loans[i].expectedEndDate %></td>
+                      <td><input type="button" class="btn btn-info" value="View"></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
