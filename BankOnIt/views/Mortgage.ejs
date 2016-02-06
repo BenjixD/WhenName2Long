@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<% if(status){%> 
-    <%- include standardnavigatorlogin.ejs %>
-<%}else{%>
-    <%- include standardnavigator.ejs %>
-<%}%>
+<%- include standardnavigator.ejs %>
 
 <body style="background-color:#EAEAEA;">
 <div id="container1">
@@ -16,6 +12,7 @@
         <div class="panel panel-default" >
           <div class="panel-heading">
             <h4 class="panel-title">
+            <img class="block" src="http://www.clker.com/cliparts/5/v/V/e/t/J/simple-red-house.svg" alt="" style="width:25px;height:25px;">
               <a data-toggle="collapse" href="#collapse1">Mortgage</a>   <!--NAMING-->
             </h4>
           </div>
@@ -48,7 +45,7 @@
           </div>
           <div class="panel-heading">
             <h4 class="panel-title">
-              <img src="carkey.png" class="img-rounded" alt="carkey" style="width:25px;height:25px;">
+              <img class="block" src="https://github.com/danhsiu/danhsiuliu/blob/master/images/carkey.jpg?raw=true" alt="" style="width:25px;height:25px;">
               <a data-toggle="collapse" href="#collapse2">Car Expense</a>   <!--NAMING-->
             </h4>
           </div>
@@ -77,6 +74,39 @@
               </tbody>
             </table>
           </div>
+
+ <div class="panel-heading">
+            <h4 class="panel-title">
+                   <img src="http://tradeoff-analytics-demo.mybluemix.net/images/app.png" alt="" style="width:25px; height:25px;">
+              <a data-toggle="collapse" href="#collapse3">Savings Analytics</a>   <!--NAMING-->
+            </h4>
+          </div>
+
+          <div id="collapse3" class="panel-collapse collapse">
+            <!--<div class="panel-body">Panel Body</div>-->
+            <table class="table table-hover">
+              <thread>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Expected End Date</th>
+                </tr>
+              </thread>
+              <tbody>
+                <% for(var i=0; i<loans.length; i++) {%>
+                  <tr>
+                      <td><%= loans[i].name %></td>
+                      <td><%= loans[i].total %></td>
+                      <td><%= loans[i].currentBalance %></td>
+                      <td><%= loans[i].expectedEndDate %></td>
+                      <td><input type="button" class="btn btn-info" value="View"></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>
