@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<% if(status){%> 
+    <%- include standardnavigatorlogin.ejs %>
+<%}else{%>
+    <%- include standardnavigator.ejs %>
+<%}%>
+
+<body style="background-color:#EAEAEA;">
+<div id="container1">
+	<div id="body1">
+		<form class="form-horizontal" role="form" style="width: 50%;">
+    	<div class="form-group">
+		    <label for="name" class="col-sm-2 control-label">Enter Name of the Loan:</label>
+		    <div class="col-sm-10">
+		            <input type="text" class="form-control" id="name" name="name" required>
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="interestType" class="col-sm-2 control-label">Interest Type</label>
+		    <div class="col-sm-10">
+		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="interestType" name="interestType" required>Select a Type<span class="caret"></span></button>
+		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+		        <% for(var i=0; i<loans.length; i++) {%>
+               <!--you finish it-->
+        	</div>
+    	</div>
+    	<div class="form-group">
+		    <label for="interestRate" class="col-sm-2 control-label">Enter the Interest Rate:</label>
+		    <div class="col-sm-10">
+		            <input type="text" class="form-control" id="interestRate" name="interestRate">
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="name" class="col-sm-2 control-label">Enter Name of the Loan:</label>
+		    <div class="col-sm-10">
+		            <input type="text" class="form-control" id="name" name="name" required>
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="annuityType" class="col-sm-2 control-label">Annuity Type</label>
+		    <div class="col-sm-10">
+		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="annuityType" name="annuityType" required>Select a Type<span class="caret"></span></button>
+		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+		        <% for(var i=0; i<loans.length; i++) {%>
+               <!--you finish it-->
+        	</div>
+    	</div>
+    	<div class="form-group">
+		    <label for="fixedInterest" class="col-sm-2 control-label">Fixed Interest?</label>
+		    <div class="col-sm-10">
+		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="fixedInterest" name="fixedInterest" required>Select a Type<span class="caret"></span></button>
+		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+		        <% for(var i=0; i<loans.length; i++) {%>
+               <!--you finish it-->
+        	</div>
+    	</div>
+    	<div class="form-group">
+		    <label for="fees" class="col-sm-2 control-label">Service Fees:</label>
+		    <div class="col-sm-10">
+		            <input type="number" class="form-control" id="fees" name="fees" required>
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="total" class="col-sm-2 control-label">Total Loan:</label>
+		    <div class="col-sm-10">
+		            <input type="number" class="form-control" id="total" name="total" required>
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="frequency" class="col-sm-2 control-label">Frequency</label>
+		    <div class="col-sm-10">
+		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="frequency" name="frequency" required>Select a Period<span class="caret"></span></button>
+		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+		        <% for(var i=0; i<loans.length; i++) {%>
+               <!--you finish it-->
+        	</div>
+    	</div>
+    	<div class="form-group">
+		    <label for="notes" class="col-sm-2 control-label">Notes:</label>
+		    <div class="col-sm-10">
+		        <input type="text" class="form-control" id="notes" name="notes" required>
+		    </div>
+    	</div>
+    	<div class="form-group">
+		    <label for="purpose" class="col-sm-2 control-label">Purpose:</label>
+		    <div class="col-sm-10">
+		        <input type="text" class="form-control" id="purpose" name="purpose" required>
+		    </div>
+    	</div>
+		<div class="form-group">
+		    <div class="col-sm-10 col-sm-offset-2">
+		        <button type="submit" id="submit" name="submit" class="btn btn-primary">Submit</button>
+		    </div>
+		</div>
+	</div>
+</div>
+<%- include footernavigator.ejs %>
+</div>
+</body>
+</html>
