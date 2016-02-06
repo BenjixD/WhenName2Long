@@ -1,8 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en">
 
- <!-- Include page header-->
- <%- include standardnavigator.ejs %>
+<% if(status){%> 
+    <%- include standardnavigatorlogin.ejs %>
+<%}else{%>
+    <%- include standardnavigator.ejs %>
+<%}%>
 
 <body style="background-color:#EAEAEA;">
 <div id="container1">

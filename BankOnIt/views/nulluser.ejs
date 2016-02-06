@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<%- include standardnavigator.ejs %>
-
+<% if(status){%> 
+    <%- include standardnavigatorlogin.ejs %>
+<%}else{%>
+    <%- include standardnavigator.ejs %>
+<%}%>
 <body>
 <div id="container1">
 	<div class="container">

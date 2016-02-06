@@ -3,7 +3,11 @@
 
 
  <!-- Include page header-->
- <%- include standardnavigator.ejs %>
+ <% if(status){%> 
+    <%- include standardnavigatorlogin.ejs %>
+<%}else{%>
+    <%- include standardnavigator.ejs %>
+<%}%>
 
  <body>
  	<h1>404 Error Scrub<h1>

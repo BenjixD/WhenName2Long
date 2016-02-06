@@ -21,6 +21,7 @@ router.post('/', function(req, res, next) {
 
 router.get('/contactus', function(req, res) {
 	var loggedIn = logValue(req);
+	console.log(loggedIn);
   res.render('contactus', { title: 'Contact Us', status: loggedIn});
 });
 
