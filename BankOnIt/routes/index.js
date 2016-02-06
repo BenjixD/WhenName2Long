@@ -80,6 +80,20 @@ router.get('/csc369', function(req,res){
 });
 //FOR TESTIN
 
+//facebook login and signup
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+    router.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/successlogin',
+            failureRedirect : '/'
+        }));
+
+
+
+//
+
 
 router.get('/login', function(req, res){
 	var loggedIn = logValue(req);
