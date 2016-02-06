@@ -104,16 +104,10 @@ router.get('/successlogin', LoggedIn, function(req,res){
 });
 
 
-router.get('/successsignup', function(req,res){
+router.get('/successsignup', LoggedIn, function(req,res){
 
 		var loggedIn = logValue(req);
 
-		if(req.isAuthenticated()){
-			loggedIn = true;
-		}
-		else{
-			loggedIn = false;
-		}
 	res.render('Successsignup', { title: 'GOOD JOB', user: req.user, status: loggedIn});
 });
 
