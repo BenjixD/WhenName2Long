@@ -8,12 +8,12 @@ module.exports = function(passport){
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('Home', { title: 'Home' });
+  res.render('Home', { title: 'Home', username:'Jorden' });
 });
 
 router.post('/', function(req, res, next) {
   console.log(req.body.button);
-  res.render('Home', { title: 'Home' });
+  res.render('Home', { title: 'Home', username:'Jorden' });
 });
 
 router.post('/loans', function(req, res){
@@ -51,7 +51,7 @@ router.get('/loans', function(req, res){
 			console.log("helloworld");
 		};
 		console.log("hello");
-		res.render('Mortgage', { title:'Loans', loans:listofLoans });
+		res.render('Mortgage', { title:'Loans', loans:listofLoans, username:'Jorden' });
 	});
 
 //res.redirect('/csc369');
@@ -78,7 +78,7 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/signup', function(req, res){
-
+	res.render('signup', { title: 'signup', username:'Jorden' });
 });
 
 router.post('/signup', function(req, res){
