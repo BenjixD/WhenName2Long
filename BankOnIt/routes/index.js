@@ -3,9 +3,9 @@ var express = require('express');
 var passport = require('../config/passport.js');
 var user = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
-
-module.exports = function(passport){
 var router = express.Router();
+module.exports = function(passport){
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('Home', { title: 'Home', username:'Jorden' });
