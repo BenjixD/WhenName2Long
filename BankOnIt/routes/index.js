@@ -67,5 +67,11 @@ router.get('/csc369', function(req,res){
 	res.send("Hello world");
 });
 
+router.post('/login', passport.authenticate('local-login', {
+	successRedirect: '/',		// Redirect to main page when login complete
+	failureRedirect: '/login',	// Return to login when fail, and flash error
+	failureFlash: true
+}));
+
 
 module.exports = router;
