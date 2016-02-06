@@ -7,10 +7,37 @@
 	<h1>Sign Up</h1>
 	<p>Enter in your information</p>
 
-	<form action="/signup" method="post" >
-        <div class="form-group">
-            <label class="control-label">First Name:</label>
-            <input type="text" name="email" required class="form-control" autocomplete="off">
+	<form class="form-horizontal" role="form" style="width: 50%;">
+    <div class="form-group">
+        <label for="fname" class="col-sm-2 control-label">First Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
         </div>
+    </div>
+    <div class="form-group">
+        <label for="lname" class="col-sm-2 control-label">Last Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+        </div>
+    </div>
+</form>
+<%- include footernavigator.ejs %>
 </body>
 </html>
