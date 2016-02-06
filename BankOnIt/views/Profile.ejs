@@ -3,10 +3,17 @@
 
 <%- include standardnavigator.ejs %>
 
-<body>
+<body style="background-color:#EAEAEA;">
 <div id="container1">
 	<div class="container" id="body1">
-	<h1>Your Profile :)</h1>
+		<div style="background-color:White;">
+		<h1>Your Profile :)</h1>
+		<h3><span class="fa fa-user">User</span></h3>
+		<p>
+			First Name: <%= firstName %><br/>
+			Last Name: <%= lastName %><br/>
+			Email: <%= email %>
+		</p>
 	<p>Click on the Loans to view your information</p>
 <%- include footernavigator.ejs %>
 </div>
