@@ -81,9 +81,11 @@ router.get('/signup', function(req, res){
 	res.render('signup', { title: 'signup', username:'Jorden' });
 });
 
-router.post('/signup', function(req, res){
-	
-});
+router.post('/signup', passport.authenticate('local-signup', {
+	successRedirect: '/',		// Redirect to main page when login complete
+	failureRedirect: '/csc369',	// Return to signup when fail, and flash error
+	failureFlash: true
+}));
 
 	return router;
 };

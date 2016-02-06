@@ -57,7 +57,8 @@ if (app.get('env') === 'development') {
     res.render('error', {
       message: err.message,
       error: err,
-      title: 'Error'
+      title: 'Error',
+      username: 'Jorden'
     });
   });
 }

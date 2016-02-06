@@ -32,11 +32,14 @@ module.exports = function(passport) {
 					return done(null, false, req.flash('signupMessage', emailTaken));
 				else {
 					var newUser = new User();
+                    newUser.local.firstName = '';
+                    newUser.local.lastName = '';
 					newUser.local.email = email;
 					newUser.local.password = newUser.generateHash(password);
-					
+				
 					newUser.save(function(err) {
-						if (err)
+						console.log("new user sign uped");
+                        if (err)
 							throw err;
 						return done(null, newUser);
 					});
