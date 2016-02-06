@@ -1,6 +1,7 @@
 var express = require('express');
 var user_db = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
+var calc = require('../public/javascripts/loan_calculator.js')
 var router = express.Router();
 
 module.exports = function(passport){
@@ -36,25 +37,27 @@ router.get('/loans', function(req, res){
 
 		var a = new loanCollection();
 		// add message
-		a.name = "Waifu Loans";
+		a.name = "Bonus Waifu Loans";
 		a.userID = "1";
  		a.interestType = "compound";
- 		a.interestRate = 5;
+ 		a.interestRate = 0.05;
  		a.fixedInterest = true;
  		a.purpose = "buy waifus";
- 		a.startDate = "1/10/31";
- 		a.expectedEndDate = "2/10/31";
+ 		a.startDate = "2016-01-31";
+ 		a.lastPaymentDate = "2016-03-31";
  		a.total = 2500000
  		a.currentBalance = 50000;
- 		a.frequency = 10;
+ 		a.frequency = 'Monthly';
  		a.installmentSum = 5000;
+ 		a.annuityType = 'Annuity Due';
+ 		a.expectedEndDate = calc.expected_loan_completion(new Date(a.lastPaymentDate), a.interestRate, a.installmentSum, a.currentBalance, a.frequency, a.annuityType);
  		a.notes = " I am poor";
  		a.save();
 
 		for (var i = data.length - 1; i >= 0; i--) {
 			listofLoans.push(data[i]);
-			console.log(data[i].name);
-			console.log("helloworld");
+			//console.log(data[i].name);
+			//console.log("helloworld");
 		};
 		console.log("hello");
 		res.render('Mortgage', { title:'Loans', loans:listofLoans, username:'Jorden' });
@@ -74,7 +77,10 @@ router.post('/csc369', function(req, res){
 
 router.get('/csc369', function(req,res){
 	
-	res.send("Hello world");
+	//res.send("Hello world");
+	var ans = calc.expected_loan_completion(new Date('2016-01-01'), 0.05, 1000, 4545.95, "Monthly", "Annuity Due"); 
+	res.send(ans);
+	console.log("hoy");
 });
 //FOR TESTIN
 
@@ -101,20 +107,7 @@ router.post('/signup', passport.authenticate('signup-local', {
 }));
 
 router.get('(/profile/id/:id)?', function(req, res) {
-
-		var id;
-		user_db.findOne({"_id": id} function(err, data)
-		{
-			if(data == null){
-				res.redirect("/");
-			}
-
-			else{
-				res.render('Profile', {
-            	title: "My Profile", username:'Jorden', user : data // get the user out of session and pass to template				
-			}
-		})
-    });
+	res.render('Profile', { title: "My Profile", username:'Jorden', user : req.user});
 });
 
 
@@ -132,6 +125,7 @@ router.get('/logout', function(req,res){
 	res.redirect('/');
 });
 
+
 	return router;
 };
 function LoggedIn(req, res, next) {
@@ -144,3 +138,5 @@ function LoggedIn(req, res, next) {
 	res.redirect('/');
 }
 //module.exports = router;
+
+

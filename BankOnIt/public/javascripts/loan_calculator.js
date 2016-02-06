@@ -1,6 +1,10 @@
-function expected_loan_completion(start_date, interest_rate, payment, balance, period, type)
+
+module.exports = {
+
+expected_loan_completion: function(start_date, interest_rate, payment, balance, period, type)
 {
-	var interest = 1 + interest_rate;
+	console.log(start_date + " " + interest_rate + " " + payment + " " + balance + " " + period + " " + type);
+	var interest = 1 + interest_rate; 
 	var result;
 	var est_end_date;
 
@@ -18,33 +22,42 @@ function expected_loan_completion(start_date, interest_rate, payment, balance, p
 		var a = Math.log(1 - (interest_rate * balance)/(payment * interest));
 		var b = Math.log(interest);
 
+
 		result = -1 * a/b;
 	}
 
-	Math.ceil(result);
+	result = Math.ceil(result);
 
 	if(period == 'Daily')
 	{
-		est_end_date = start_date + result;
+		start_date.setDate(start_date.getDate() + result);
+		est_end_date = start_date;
 	}
 
 	else if (period == "Weekly")
 	{
-		est_end_date = start_date + 7 * result;
+		start_date.setDate(start_date.getDate() + 7 * result) ;
+		est_end_date = start_date;
 	}
 
 	else if (period == "Monthly")
 	{
 		var day = start_date.getDate();
-		var start_month = start_date.setDate(1);
+		var start_month = start_date;
+		//start_month.setDate(1);
 
-		est_end_date = start_month.setMonth(start_month.getMonth + result);
+		start_month.setMonth(start_month.getMonth() + result);
+
+		est_end_date = start_month;
 	}
 
 	else if (period == "Yearly")
 	{
-		est_end_date = start_date + 365*result + Math.floor(result/4);
+		console.log(result + ", " + start_date.getFullYear());
+		start_date.setYear(start_date.getFullYear() + result);
+		est_end_date = start_date;
 	}
-
-	return est_end_date;
+	console.log(est_end_date + " " + typeof est_end_date);
+	return est_end_date.toDateString();
+	}	
 }
