@@ -97,7 +97,7 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', passport.authenticate('signup-local', {
-	successRedirect: '/loans',		// Redirect to main page when login complete
+	successRedirect: '/csc369',		// Redirect to main page when login complete
 	failureRedirect: '/',	// Return to signup when fail, and flash error
 	failureFlash: true
 }));
