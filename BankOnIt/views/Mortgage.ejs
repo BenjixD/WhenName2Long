@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include standardnavigator.ejs %>
+
+<body>
+<div style="background-color:red;">
+  <div>
+    <div class="container" style="background-color:white;">
+      <h2>LOAN CALCULATOR</h2>   <!--NAMING-->
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse1">Mortgage</a>   <!--NAMING-->
+            </h4>
+          </div>
+
+          <!--COLLAPSE START-->
+          <div id="collapse1" class="panel-collapse collapse">
+            <!--<div class="panel-body">Panel Body</div>-->
+            <table class="table table-hover">
+              <thread>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Expected End Date</th>
+                </tr>
+              </thread>
+
+              <tbody>
+                <% for(var i=0; i<loans.length; i++) {%>
+                  <tr>
+                      <td><%= loans[i].name %></td>
+                      <td><%= loans[i].total %></td>
+                      <td><%= loans[i].currentBalance %></td>
+                      <td><%= loans[i].expectedEndDate %></td>
+                      <td><input type="button" class="btn btn-info" value="View"></td>
+                  </tr>
+                <% } %>
+              </tbody>
+
+            </table>
+          </div>
+        <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse2">Car Expense</a>   <!--NAMING-->
+            </h4>
+          </div>
+
+          <!--COLLAPSE START-->
+          <div id="collapse2" class="panel-collapse collapse">
+            <!--<div class="panel-body">Panel Body</div>-->
+            <table class="table table-hover">
+              <thread>
+                <tr>
+                    <th>Kantai Collection</th>
+                    <th>Guilty Crown</th>
+                    <th>Love Live</th>
+                    <th> </th>
+                </tr>
+              </thread>
+
+              <tbody>
+                <% for(var i=0; i<loans.length; i++) {%>
+                  <tr>
+                      <td><%= loans[i] %></td>          
+                  </tr>
+                <% } %>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<%- include footerNavigator.ejs %>
+</body>
+</html>

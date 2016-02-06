@@ -4,15 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
+var port = process.env.PORT || 3000;
+
+//connect to database server
+mongoose.connect('mongodb://localhost:27017/Scotia');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,7 +47,8 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: err,
+      title: 'Error'
     });
   });
 }
@@ -58,3 +65,6 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+app.listen(port);
+console.log('Server running on LOCALHOST ' + port);
