@@ -21,24 +21,22 @@
       <a href="/"><img src="http://www.ratehub.ca/blog/files/2011/10/scotiabank-logo-ratehub1.jpg"alt="Scotia" style="height:50px;"></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a class="navbar-brand" href="#"><%= title %></a></li>
+      <li><a class="navbar-brand" href="/"><%= title %></a></li>
       <li><a href="/">Home</a></li> <!--class="active" at the li part-->
       <li><a href="/contactus">Contact Us</a></li>
-      <li><a href="/loans">Mortgage</a></li>
+      <% if(status){%>
+        <li><a href="/loans">Mortgage</a></li>
+        <%}%>
       </ul>
 	  <ul class="nav navbar-nav navbar-right">
-		  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="visibility: hidden"><%= username %><span class="caret" class="glyphicon glyphicon-folder-open"></span></a>
-	       	<ul class="dropdown-menu">
-            <li><a href="/Profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-	        </ul>
-	    </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="visibility: visible"><%= username %><span class="caret"></span></a>
+      <% if(status){%>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="visibility: visible"><%= user.firstName %><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/Profile" class="glyphicon glyphicon-folder-open"> Profile</a></li>
+            <li><a href="/profile/id/<%= user._id %>" class="glyphicon glyphicon-folder-open"> Profile</a></li>
             <li><a href="/logout" class="glyphicon glyphicon-cog"> Logout</a></li>
           </ul>
         </li>
+       <%}%>
 	  </ul>
   </div>
 </nav>
