@@ -114,7 +114,7 @@ router.get('/successsignup', function(req,res){
 		else{
 			loggedIn = false;
 		}
-	res.render('Successsignup', { title: 'GOOD JOB', status: loggedIn});
+	res.render('Successsignup', { title: 'GOOD JOB', user: req.user, status: loggedIn});
 });
 
 router.get('/profile(/id/:id)?', LoggedIn, function(req, res) {
