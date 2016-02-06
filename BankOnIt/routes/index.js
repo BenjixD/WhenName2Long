@@ -1,9 +1,11 @@
 var express = require('express');
-var router = express.Router();
+
 var passport = require('../config/passport.js');
 var user = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
 
+module.exports = function(passport){
+var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('Home', { title: 'Home' });
@@ -83,5 +85,6 @@ router.post('/signup', function(req, res){
 	
 });
 
-
-module.exports = router;
+	return router;
+};
+//module.exports = router;
