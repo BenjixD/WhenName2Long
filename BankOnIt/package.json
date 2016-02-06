@@ -17,6 +17,7 @@
     "mongoose": "~4.3.7",
     "bcrypt-nodejs": "*",
     "passport": "~0.3.2",
-    "passport-local":"~0.1.6"
+    "passport-local":"~0.1.6",
+	"connect-flash":"*"
   }
 }
