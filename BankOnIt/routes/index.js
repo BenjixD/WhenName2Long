@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('../config/passport.js');
 var user = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
 
