@@ -5,20 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var expressSession = require('express-session');
 var passport = require('passport');
-var flash = require('connect-flash');
-
-var routes = require('./routes/index')(passport);
-//var users = require('./routes/users');
+var dbConfig = require('./db');
 
 var app = express();
 
 var port = process.env.PORT || 3000;
 
 //connect to database server
-mongoose.connect('mongodb://localhost:27017/Scotia');
+mongoose.connect(dbConfig.url);
 
-require('./config/passport.js')(passport); // pass passport for configuration
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +28,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// TODO - Why Do we need this key ?
+app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
+
+ // Using the flash middleware provided by connect-flash to store messages in session
+ // and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+var initPassport = require('./config/init.js');
+initPassport(passport);
+
+var routes = require('./routes/index.js')(passport);
 
 app.use('/', routes);
 //app.use('/users', users);
