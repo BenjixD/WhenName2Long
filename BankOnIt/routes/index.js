@@ -72,6 +72,7 @@ router.post('/loans', function(req, res){
 	console.log('went to loans');
 });
 
+//FOR TESTIN
 router.post('/csc369', function(req, res){
 	res.redirect('/csc369');
 });
@@ -80,14 +81,16 @@ router.get('/csc369', function(req,res){
 	
 	res.send("Hello world");
 });
+//FOR TESTIN
+
 
 router.get('/login', function(req, res){
 	res.render('login', { title: 'log in', username:'Jorden' });
 });
 
 
-router.post('/login', passport.authenticate('local-login', {
-	successRedirect: '/',		// Redirect to main page when login complete
+router.post('/login', passport.authenticate('login-local', {
+	successRedirect: '/successlogin',		// Redirect to main page when login complete
 	failureRedirect: '/login',	// Return to login when fail, and flash error
 	failureFlash: true
 }));
@@ -97,22 +100,16 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', passport.authenticate('signup-local', {
-	successRedirect: '/csc369',		// Redirect to main page when login complete
-	failureRedirect: '/',	// Return to signup when fail, and flash error
+	successRedirect: '/successsignup',		// Redirect to main page when login complete
+	failureRedirect: '/signup',	// Return to signup when fail, and flash error
 	failureFlash: true
 }));
 
-router.post('/successlogin', function(req, res){
-
-});
 
 router.get('/successlogin', function(req,res){
 	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden' });
 });
 
-router.post('/successsignup', function(req, res){
-
-});
 
 router.get('/successsignup', function(req,res){
 	res.render('Successsignup', { title: 'GOOD JOB', username:'Jorden' });
