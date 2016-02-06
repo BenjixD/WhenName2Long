@@ -1,9 +1,13 @@
 .navbar-default {
   color:white;
-  background-color:#D81E05;
+  background-color:red;
   background-image: none;
   background-repeat: no-repeat;
  }
+
+.navbar .nav > li > a {
+  color:#FF2D2D;
+}
 
 .navbar .nav > li > a {
     color:  #ffffff;
@@ -11,4 +15,28 @@
 
 .navbar-default .navbar-brand {
 	color:  #ffffff;
+}
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#container1 {
+   min-height:92%;
+   position:relative;
+}
+
+#body1 {
+   padding:10px;
+   padding-bottom:130px;   /* Height of the footer */
+}
+#sticky-footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   text-align: center
+   height:130px;   /* Height of the footer */
+   background:#D81E05;
 }

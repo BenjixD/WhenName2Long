@@ -3,13 +3,13 @@
 
 <%- include standardnavigator.ejs %>
 
-<body>
-<div>
+<body style="background-color:#EAEAEA;">
+<div id="container1">
   <div>
-    <div class="container" style="background-color:#EAEAEA;">
+    <div class="container">
       <h2>LOAN CALCULATOR</h2>   <!--NAMING-->
-      <div class="panel-group">
-        <div class="panel panel-default">
+      <div class="panel-group" id="body1">
+        <div class="panel panel-default" >
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" href="#collapse1">Mortgage</a>   <!--NAMING-->
@@ -77,7 +77,7 @@
       </div>
     </div>
   </div>
+  <%- include footerNavigator.ejs %>
 </div>
-<%- include footerNavigator.ejs %>
 </body>
 </html>
