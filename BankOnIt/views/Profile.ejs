@@ -10,11 +10,13 @@
 		<h1>Your Profile :)</h1>
 		<h3><span class="fa fa-user">User</span></h3>
 		<p>
-			First Name: <%= firstName %><br/>
-			Last Name: <%= lastName %><br/>
-			Email: <%= email %>
+			First Name: <%= user.firstName %><br/>
+			Last Name: <%= user.lastName %><br/>
+			Email: <%= user.email %>
 		</p>
-	<p>Click on the Loans to view your information</p>
+		<p>Click on the Loans to view your information</p>
+		</div>
+	</div>
 <%- include footernavigator.ejs %>
 </div>
 </body>

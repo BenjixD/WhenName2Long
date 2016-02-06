@@ -105,6 +105,12 @@ router.post('/signup', passport.authenticate('signup-local', {
 	failureFlash: true
 }));
 
+router.get('/profile', function(req, res) {
+        res.render('Profile', {
+            title: "My Profile", username:'Jorden', user : req.user // get the user out of session and pass to template
+    });
+});
+
 
 router.get('/successlogin', function(req,res){
 	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden' });
