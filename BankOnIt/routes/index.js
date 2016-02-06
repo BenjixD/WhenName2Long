@@ -36,17 +36,25 @@ router.get('/loans', LoggedIn, function(req, res){
 	var listofLoans = [];
 	var loggedIn = logValue(req);
 	
-	loanCollection.find({'userId': req.user_id}, function(err, data) {
+	loanCollection.find({'userID': req.user_id}, function(err, data) {
+		
+		for (i = 0; i < data.length; i++) {
+			console.log(data[i]);
+		}
 
-		if(data == null){
+		if(data.length == 0){
 			console.log("Nothing to display");
 		}
 		else{
 			for(i = 0; i < data.length; i++){
+				// recalculate listofLoans' expectedEndDate
+				console.log("Pushing data to array");
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].save();
 				listofLoans.push(data[i]);
 			}
-			res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
 		}
+		res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
 		/* test
 		*/
 	});
@@ -162,10 +170,11 @@ router.get('/logout', function(req,res){
 
 
 router.post('/makeloan', function (req, res){
+	console.log("Request to make new loan for UserID " + req.user._id);
 	var newloan = new Loans({
 		name : req.name,
 		status : "ongoing",
-	    userID : req.user_id,
+	    userID : req.user._id,
 	    interestType : req.interestType,
 	    interestRate : req.interestRate,
 	    annuityType : req.annuityType,
@@ -184,6 +193,7 @@ router.post('/makeloan', function (req, res){
  	newloan.currentBalance = newloan.total;
  	newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
 	newloan.save();
+	res.redirect("/loans");
 
 });
 
