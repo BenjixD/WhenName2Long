@@ -37,7 +37,7 @@ app.use(passport.session()); // persistent login sessions
 
 
 app.use('/', routes);
-require('./routes')(app, passport);
+//require('./routes')(app, passport);
 //app.use('/users', users);
 //app.use(app.router);
 //routes.initialize(app);
