@@ -156,6 +156,33 @@ router.get('/logout', function(req,res){
 });
 
 
+
+router.post('/makeloan', function (req, res){
+	var newloan = new Loans({
+		name : req.name,
+		status : "ongoing",
+	    userID : req.user_id,
+	    interestType : req.interestType,
+	    interestRate : req.interestRate,
+	    annuityType : req.annuityType,
+	    fixedInterest : req.fixedInterest,
+	    fees : req.fees,
+	    purpose : req.purpose,
+ 		total : req.total,
+ 		frequency : req.frequency,
+ 		installmentSum : req.installmentSum,
+ 		notes : req.notes,
+ 		history : [],
+ 		startDate : new Date().toDateString(),
+ 		lastPaymentInterest : 0
+ 	});
+	newloan.lastPaymentDate = newloan.startDate;
+ 	newloan.currentBalance = newloan.total;
+ 	newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
+	newloan.save();
+
+});
+
 	return router;
 };
 function changeToProfile() {
