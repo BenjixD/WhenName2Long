@@ -67,5 +67,13 @@ router.get('/csc369', function(req,res){
 	res.send("Hello world");
 });
 
+router.get('/signup', function(req, res){
+
+});
+
+router.post('/signup', function(req, res){
+	
+});
+
 
 module.exports = router;
