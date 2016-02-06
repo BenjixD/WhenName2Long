@@ -8,18 +8,21 @@ module.exports = function(passport){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('Home', { title: 'Home', username:'Jorden' });
+	var loggedIn = logValue(req);
+  res.render('Home', { title: 'Home', status: loggedIn});
 });
 
 router.post('/', function(req, res, next) {
+
   console.log("Mom's spaghetti");
   console.log(req.body.sign);
   res.redirect(req.body.sign);
 
 });
 
-router.get('/contactus', function(req, res, next) {
-  res.render('contactus', { title: 'Contact Us', username:'Jorden' });
+router.get('/contactus', function(req, res) {
+	var loggedIn = logValue(req);
+  res.render('contactus', { title: 'Contact Us', status: loggedIn});
 });
 
 
@@ -27,9 +30,10 @@ router.post('/loans', function(req, res){
 	console.log("went to loans");
 });
 
-router.get('/loans', function(req, res){
+router.get('/loans', LoggedIn, function(req, res){
 	
 	var listofLoans = [];
+	var loggedIn = logValue(req);
 	
 	loanCollection.find({}, function(err, data) {
 		/* test
@@ -60,7 +64,7 @@ router.get('/loans', function(req, res){
 			//console.log("helloworld");
 		};
 		console.log("hello");
-		res.render('Mortgage', { title:'Loans', loans:listofLoans, username:'Jorden' });
+		res.render('Mortgage', { title:'Loans', loans:listofLoans, status: loggedIn });
 	});
 
 //res.redirect('/csc369');
@@ -86,7 +90,8 @@ router.get('/csc369', function(req,res){
 
 
 router.get('/login', function(req, res){
-	res.render('login', { title: 'Log In', username:'Jorden' });
+	var loggedIn = logValue(req);
+	res.render('login', { title: 'Log In', status: loggedIn});
 });
 
 
@@ -97,7 +102,8 @@ router.post('/login', passport.authenticate('login-local', {
 }));
 
 router.get('/signup', function(req, res){
-	res.render('signup', { title: 'Sign Up', username:'Jorden' });
+	var loggedIn = logValue(req);
+	res.render('signup', { title: 'Sign Up', status: loggedIn});
 });
 
 router.post('/signup', passport.authenticate('signup-local', {
@@ -106,19 +112,51 @@ router.post('/signup', passport.authenticate('signup-local', {
 	failureFlash: true
 }));
 
-router.get('(/profile/id/:id)?', function(req, res) {
-	res.render('Profile', { title: "My Profile", username:'Jorden', user : req.user});
-});
 
 
 router.get('/successlogin', LoggedIn, function(req,res){
-	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden' });
+	var loggedIn = logValue(req);
+	res.render('Successlogin', { title: 'GOOD JOB', user: req.user, status: loggedIn});
 });
 
 
 router.get('/successsignup', function(req,res){
-	res.render('Successsignup', { title: 'GOOD JOB', username:'Jorden' });
+
+		var loggedIn = logValue(req);
+
+		if(req.isAuthenticated()){
+			loggedIn = true;
+		}
+		else{
+			loggedIn = false;
+		}
+	res.render('Successsignup', { title: 'GOOD JOB', status: loggedIn});
 });
+
+router.get('/profile(/id/:id)?', LoggedIn, function(req, res) {
+
+		var id;
+		var loggedIn = logValue(req);
+
+		if (req.originalUrl == '/profile'){ 
+			id = req.user._id;
+		}
+		else{
+			id = req.params.id;
+		}
+
+		user_db.findOne({"_id": id}, function(err, data)
+		{
+			if(data == null){
+				res.redirect("/");
+			}
+
+			else{
+				res.render('Profile', { title: "My Profile", user : data, status: loggedIn});
+			}
+		});
+	});
+
 
 router.get('/logout', function(req,res){
 	req.logout();
@@ -128,6 +166,21 @@ router.get('/logout', function(req,res){
 
 	return router;
 };
+function changeToProfile() {
+    setTimeout("location.href = '/';", 5000);
+}
+
+function logValue(req){
+
+	var loggedIn;
+	if(req.isAuthenticated()){
+		loggedIn = true;
+	}
+	else{
+		loggedIn = false;
+	}
+	return loggedIn;
+}
 function LoggedIn(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to

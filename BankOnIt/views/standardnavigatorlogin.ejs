@@ -24,7 +24,16 @@
       <li><a class="navbar-brand" href="/"><%= title %></a></li>
       <li><a href="/">Home</a></li> <!--class="active" at the li part-->
       <li><a href="/contactus">Contact Us</a></li>
-    </ul>
+      <li><a href="/loans">Mortgage</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="visibility: visible"><%= user.firstName %><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/profile/id/<%= user._id %>" class="glyphicon glyphicon-folder-open"> Profile</a></li>
+            <li><a href="/logout" class="glyphicon glyphicon-cog"> Logout</a></li>
+          </ul>
+        </li>
+	  </ul>
   </div>
 </nav>
 </body>
