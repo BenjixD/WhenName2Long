@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include standardnavigator.ejs %>
+
+<body style="background-color:#EAEAEA;">
+<div id="container1">
+  <div id="body1">
+  	<h1 class="container">Loan Details</h1>
+  	<p> 
+  		Loan:<td><%= loans.name %></td><br/>
+	  	Status:<td><%= loans.status %></td><br/>
+	  	Interest Type:<td><%= loans.interestType %></td><br/>
+	  	Interest Rate:<td><%= loans.interestRate %></td><br/>
+	  	Annuity Type:<td><%= loans.annuityType %></td><br/>
+	  	Fixed Interest:<td><%= loans.fixedInterest %></td><br/>
+	  	Service Fees:<td><%= loans.fees %></td><br/>
+	  	Start Date:<td><%= loans.startDate %></td><br/>
+	  	Expected End Date:<td><%= loans.expectedEndDate %></td><br/>
+	  	Last Payment Date:<td><%= loans.lastPaymentDate %></td><br/>
+	  	Last Payment Interest:<td><%= loans.lastPaymentInterest %></td><br/>
+	  	Total Loan Amount:<td><%= loans.total %></td><br/>
+	  	Current Balance:<td><%= loans.currentBalance %></td><br/>
+	  	Frequency:<td><%= loans.frequency %></td><br/>
+	  	Installment:<td><%= loans.installmentSum %></td><br/>
+	  	Notes:<td><%= loans.notes %></td><br/>
+	  	Purpose<td><%= loans.purpose %></td>
+  </p>
+  </div>
+  <%- include footerNavigator.ejs %>
+</div>
+</body>
+</html>
