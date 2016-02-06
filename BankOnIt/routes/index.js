@@ -1,5 +1,5 @@
 var express = require('express');
-//var user = require('../Schemas/user.js');
+var user_db = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
 var router = express.Router();
 
@@ -16,6 +16,11 @@ router.post('/', function(req, res, next) {
   res.redirect(req.body.sign);
 
 });
+
+router.get('/contactus', function(req, res, next) {
+  res.render('contactus', { title: 'Contact Us', username:'Jorden' });
+});
+
 
 router.post('/loans', function(req, res){
 	console.log("went to loans");
@@ -75,7 +80,7 @@ router.get('/csc369', function(req,res){
 
 
 router.get('/login', function(req, res){
-	res.render('login', { title: 'log in', username:'Jorden' });
+	res.render('login', { title: 'Log In', username:'Jorden' });
 });
 
 
@@ -86,7 +91,7 @@ router.post('/login', passport.authenticate('login-local', {
 }));
 
 router.get('/signup', function(req, res){
-	res.render('signup', { title: 'signup', username:'Jorden' });
+	res.render('signup', { title: 'Sign Up', username:'Jorden' });
 });
 
 router.post('/signup', passport.authenticate('signup-local', {
@@ -95,9 +100,20 @@ router.post('/signup', passport.authenticate('signup-local', {
 	failureFlash: true
 }));
 
-router.get('/profile', function(req, res) {
-        res.render('Profile', {
-            title: "My Profile", username:'Jorden', user : req.user // get the user out of session and pass to template
+router.get('(/profile/id/:id)?', function(req, res) {
+
+		var id;
+		user_db.findOne({"_id": id} function(err, data)
+		{
+			if(data == null){
+				res.redirect("/");
+			}
+
+			else{
+				res.render('Profile', {
+            	title: "My Profile", username:'Jorden', user : data // get the user out of session and pass to template				
+			}
+		})
     });
 });
 
