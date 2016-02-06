@@ -75,7 +75,7 @@ router.get('/csc369', function(req,res){
 
 router.get('/login', function(req, res){
 	var loggedIn = logValue(req);
-	res.render('login', { title: 'Log In', status: loggedIn});
+	res.render('login', { title: 'Log In', user: req.user, status: loggedIn});
 });
 
 
@@ -87,7 +87,7 @@ router.post('/login', passport.authenticate('login-local', {
 
 router.get('/signup', function(req, res){
 	var loggedIn = logValue(req);
-	res.render('signup', { title: 'Sign Up', status: loggedIn});
+	res.render('signup', { title: 'Sign Up', user: req.user, status: loggedIn});
 });
 
 router.post('/signup', passport.authenticate('signup-local', {
