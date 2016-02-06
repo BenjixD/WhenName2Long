@@ -9,12 +9,10 @@
 		<div id="body1">
 			<img src="https://s-media-cache-ak0.pinimg.com/originals/51/aa/c8/51aac8e5328790194fc4220dfd88c1f7.gif" alt="Success" style="width:400px;height:400px;">
 			<div class="jumbotron">
-		    	<h1>You have successfully logged in XD</h1>
-		    	<!--
-		    	<% (changePage){%> 
-		    		<%= change()  %>
-		    	<%}%>
-		    -->
+				<form action="/profile/id/<%= user._id %>" method="get">
+		    		<button type="submit" id="login" name="login" class="btn btn-primary">Ok</button>
+		    	</form>
+	    
 			</div>
 		    <img src="https://s-media-cache-ak0.pinimg.com/originals/51/aa/c8/51aac8e5328790194fc4220dfd88c1f7.gif" alt="Success" style="width:400px;height:400px;">
 

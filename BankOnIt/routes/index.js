@@ -85,7 +85,7 @@ router.get('/login', function(req, res){
 
 
 router.post('/login', passport.authenticate('login-local', {
-	successRedirect: '/profile',		// Redirect to main page when login complete
+	successRedirect: '/successlogin',		// Redirect to main page when login complete
 	failureRedirect: '/login',	// Return to login when fail, and flash error
 	failureFlash: true
 }));
@@ -100,22 +100,6 @@ router.post('/signup', passport.authenticate('signup-local', {
 	failureFlash: true
 }));
 
-router.get('(/profile/id/:id)?', function(req, res) {
-
-		var id;
-		user_db.findOne({"_id": id} function(err, data)
-		{
-			if(data == null){
-				res.redirect("/");
-			}
-
-			else{
-				res.render('Profile', {
-            	title: "My Profile", username:'Jorden', user : data // get the user out of session and pass to template				
-			}
-		})
-    });
-});
 
 
 router.get('/successlogin', LoggedIn, function(req,res){
@@ -127,10 +111,35 @@ router.get('/successsignup', function(req,res){
 	res.render('Successsignup', { title: 'GOOD JOB', username:'Jorden' });
 });
 
+router.get('/profile(/id/:id)?', function(req, res) {
+
+		var id;
+
+		if (req.originalUrl == '/profile'){ 
+			id = req.user._id;
+		}
+		else{
+			id = req.params.id;
+		}
+
+		user_db.findOne({"_id": id}, function(err, data)
+		{
+			if(data == null){
+				res.redirect("/");
+			}
+
+			else{
+				res.render('Profile', { title: "My Profile", username:'Jorden', user : data});
+			}
+		});
+	});
+
+
 router.get('/logout', function(req,res){
 	req.logout();
 	res.redirect('/');
 });
+
 
 	return router;
 };
