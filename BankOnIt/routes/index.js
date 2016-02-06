@@ -36,36 +36,19 @@ router.get('/loans', LoggedIn, function(req, res){
 	var listofLoans = [];
 	var loggedIn = logValue(req);
 	
-	loanCollection.find({}, function(err, data) {
+	loanCollection.find({'userId': req.user_id}, function(err, data) {
+
+		if(data == null){
+			console.log("Nothing to display");
+		}
+		else{
+			for(i = 0; i < data.length; i++){
+				listofLoans.push(data[i]);
+			}
+			res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
+		}
 		/* test
 		*/
-
-		var a = new loanCollection();
-		// add message
-		a.name = "Bonus Waifu Loans";
-		a.userID = "1";
- 		a.interestType = "compound";
- 		a.interestRate = 0.05;
- 		a.fixedInterest = true;
- 		a.purpose = "buy waifus";
- 		a.startDate = "2016-01-31";
- 		a.lastPaymentDate = "2016-03-31";
- 		a.total = 2500000
- 		a.currentBalance = 50000;
- 		a.frequency = 'Monthly';
- 		a.installmentSum = 5000;
- 		a.annuityType = 'Annuity Due';
- 		a.expectedEndDate = calc.expected_loan_completion(new Date(a.lastPaymentDate), a.interestRate, a.installmentSum, a.currentBalance, a.frequency, a.annuityType);
- 		a.notes = " I am poor";
- 		a.save();
-
-		for (var i = data.length - 1; i >= 0; i--) {
-			listofLoans.push(data[i]);
-			//console.log(data[i].name);
-			//console.log("helloworld");
-		};
-		console.log("hello");
-		res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
 	});
 
 //res.redirect('/csc369');
