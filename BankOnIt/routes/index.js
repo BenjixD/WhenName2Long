@@ -21,8 +21,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body.button);
-  res.render('Home', { title: 'Home', username:'Jorden' });
+  console.log("Mom's spaghetti");
+  console.log(req.body.sign);
+  res.redirect(req.body.sign);
+
 });
 
 router.post('/loans', function(req, res){
@@ -77,6 +79,10 @@ router.post('/csc369', function(req, res){
 router.get('/csc369', function(req,res){
 	
 	res.send("Hello world");
+});
+
+router.get('/login', function(req, res){
+	res.render('login', { title: 'log in', username:'Jorden' });
 });
 
 
