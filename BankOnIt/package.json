@@ -19,6 +19,7 @@
     "bcrypt-nodejs": "*",
     "passport": "~0.3.2",
     "passport-local":"~0.1.6",
-	"connect-flash":"*"
+	 "connect-flash":"*",
+   "express-session": "*"
   }
 }

@@ -1,9 +1,18 @@
 var express = require('express');
-
-var passport = require('../config/passport.js');
-var user = require('../Schemas/user.js');
+//var user = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
 var router = express.Router();
+
+var isAuthenticated = function (req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler 
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (req.isAuthenticated())
+		return next();
+	// if the user is not authenticated then redirect him to the login page
+	res.redirect('/');
+}
+
 module.exports = function(passport){
 
 /* GET home page. */
@@ -78,13 +87,12 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/signup', function(req, res){
-	console.log("landed at signup");
 	res.render('signup', { title: 'signup', username:'Jorden' });
 });
 
-router.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', passport.authenticate('signup-local', {
 	successRedirect: '/loans',		// Redirect to main page when login complete
-	failureRedirect: '/loans',	// Return to signup when fail, and flash error
+	failureRedirect: '/',	// Return to signup when fail, and flash error
 	failureFlash: true
 }));
 
