@@ -78,12 +78,13 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/signup', function(req, res){
+	console.log("landed at signup");
 	res.render('signup', { title: 'signup', username:'Jorden' });
 });
 
 router.post('/signup', passport.authenticate('local-signup', {
 	successRedirect: '/loans',		// Redirect to main page when login complete
-	failureRedirect: '/signup',	// Return to signup when fail, and flash error
+	failureRedirect: '/loans',	// Return to signup when fail, and flash error
 	failureFlash: true
 }));
 
