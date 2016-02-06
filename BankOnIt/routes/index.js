@@ -65,7 +65,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			//console.log("helloworld");
 		};
 		console.log("hello");
-		res.render('Mortgage', { title:'Loans', loans:listofLoans, status: loggedIn });
+		res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
 	});
 
 //res.redirect('/csc369');
