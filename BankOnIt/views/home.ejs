@@ -8,6 +8,12 @@
 <%}%>
 
 <body style="background-color:#EAEAEA;">
+	<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 <div id="container1">
 	<div class="container">
 	<div class="jumbotron" id="body1">
@@ -31,4 +37,21 @@
 <%- include footernavigator.ejs %>
 </div>
 </body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1071255159582585',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 </html>
