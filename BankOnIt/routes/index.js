@@ -80,7 +80,7 @@ router.get('/login', function(req, res){
 
 
 router.post('/login', passport.authenticate('login-local', {
-	successRedirect: '/successlogin',		// Redirect to main page when login complete
+	successRedirect: '/profile',		// Redirect to main page when login complete
 	failureRedirect: '/login',	// Return to login when fail, and flash error
 	failureFlash: true
 }));
@@ -103,7 +103,7 @@ router.get('/profile', function(req, res) {
 
 
 router.get('/successlogin', LoggedIn, function(req,res){
-	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden' });
+	res.render('Successlogin', { title: 'GOOD JOB', username:'Jorden', user: req.user, changePage: true, change: changeToProfile});
 });
 
 
@@ -118,6 +118,9 @@ router.get('/logout', function(req,res){
 
 	return router;
 };
+function changeToProfile() {
+    setTimeout("location.href = '/';", 5000);
+}
 function LoggedIn(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
