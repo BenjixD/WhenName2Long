@@ -135,19 +135,23 @@ router.get('/profile(/id/:id)?', LoggedIn, function(req, res) {
 		});
 	});
 
-router.get('/makeloan', function(req, res){
+router.get('/makeloan', LoggedIn, function(req, res){
+
+	var loggedIn = logValue(req);
 
 	var int_type = ['Flat','Simple','Compound'];
 	var ann_type = ['Annuity', 'Annuity Due'];
-	var fix_int = [true, false];
+	var fix_int = ['Yes', 'No'];
 	var freq = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 
-	res.render('newloan', { title: "Request Loan", 
+	res.render('newloan', { title: "Request Loan",
+							user: req.user,
 							it : int_type, 
 							at : ann_type, 
 							fi : fix_int,
 							fe : freq,
-							status: loggedIn});
+							status: loggedIn}); 
+	//res.redirect('/csc369');
 });
 
 router.get('/logout', function(req,res){

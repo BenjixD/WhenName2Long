@@ -22,7 +22,9 @@
 		    <div class="col-sm-10">
 		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="interestType" name="interestType" required>Select a Type<span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		        <% for(var i=0; i<it.length; i++) {%>
+		        <% for(var i=0; i<it.length; i++) {%> 
+		        	<li><%=  it[i] %></li>
+		        <%}%>
                <!--you finish it-->
         	</div>
     	</div>
@@ -44,6 +46,8 @@
 		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="annuityType" name="annuityType" required>Select a Type<span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		        <% for(var i=0; i<at.length; i++) {%>
+		        	<li><%= at[i] %></li>
+		        <%}%>
                <!--you finish it-->
         	</div>
     	</div>
@@ -53,6 +57,8 @@
 		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="fixedInterest" name="fixedInterest" required>Select a Type<span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		        <% for(var i=0; i<fi.length; i++) {%>
+		        	<li><%= fi[i] %> </li>
+		        <%}%>
                <!--you finish it-->
         	</div>
     	</div>
@@ -74,6 +80,8 @@
 		        <button class="dropdown dropdown-toggle" data-toggle="dropdown" id="frequency" name="frequency" required>Select a Period<span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		        <% for(var i=0; i<fe.length; i++) {%>
+		        	<li><%= fe[i] %></li>
+		        <%}%>
                <!--you finish it-->
         	</div>
     	</div>
@@ -95,7 +103,6 @@
 		    </div>
 		</div>
 	</div>
-</div>
 <%- include footernavigator.ejs %>
 </div>
 </body>
