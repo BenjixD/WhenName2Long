@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+ <!-- Include page header-->
+ <%- include standardnavigator.ejs %>
+
+<body>
+
+<div class="col-lg-offset-1">
+    <h1>Data Generation</h1>
+    <p>Each refresh adds 10 users and 10 loans.</p>
+    
+    <!--button onclick="hello()">Generate</button>-->
+</div>
+<script>
+/*var mongoose = require('mongoose');
+var user = require('./Schemas/user.js');
+var loanCollection = require('./Schemas/loans.js');
+
+function generatedb () {
+	for (var i = 1; i <= 25; i++) {
+	      db.testData.insert( { x : i } )
+
+	}
+}
+
+*/
+
+function hello() {
+    //function(){
+    	alert("Hello");
+    	//};
+}
+
+
+
+
+
+
+
+/*
+
+
+function generate (db, callback) {
+	i = 1;
+	x = "1";
+	db.collection('loans').insertOne( {
+	    "name": "John Smith",
+	    userID: x,
+	    status: "ongoing",
+	    interestType: "compound",
+	    interestRate: i, fixedInterest: true,
+	    fees: i,
+	    purpose: x, startDate: x,
+	    expectedEndDate: x,
+ 		lastPaymentDate: x,
+ 		lastPaymentInterest: i,
+ 		total: i,
+ 		currentBalance: i,
+ 		frequency: i,
+ 		installmentSum: i,
+ 		notes: x,
+ 		history: []
+	   }, function(err, result) {
+	    assert.equal(err, null);
+	    console.log("Generated loans.");
+	    callback(result);
+	  });
+	};
+
+	MongoClient.connect(url, function(err, db) {
+  	assert.equal(null, err);
+  	generate(db, function() {
+    db.close();
+    alert("data hopefully generated");
+  });
+});
+
+function generateHelper() {
+	alert("helper called");
+
+	
+
+	var MongoClient = require('mongodb').MongoClient;
+	var assert = require('assert');
+	var ObjectId = require('mongodb').ObjectID;
+	var url = 'mongodb://localhost:27017/test';
+	
+	var mongoose = require('mongoose');
+	var user = require('./Schemas/user.js');
+	var loanCollection = require('./Schemas/loans.js');
+
+    //alert("generateHelper called");
+    alert(url);
+    //generate(url, function(err, url));
+}
+*/
+
+</script>
+</body>
+
+
+ </html>
