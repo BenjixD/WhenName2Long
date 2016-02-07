@@ -40,7 +40,8 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" value="View"></td>
+                      <td><a href="/loans/id/<%= loans[i]._id %>" class="btn btn-info" role="button"> View </a></td>
+
                   </tr>
                 <% } %>
               </tbody>
@@ -72,7 +73,8 @@
                       <td><%= carExp[i].total %></td>
                       <td><%= carExp[i].currentBalance %></td>
                       <td><%= carExp[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" value="View"></td>
+                      <td><a href="/loans/id/<%= carExp[i]._id %>" class="btn btn-info" role="button"> View </a></td>
+
                   </tr>
                 <% } %>
               </tbody>
@@ -104,7 +106,7 @@
                       <td><%= creditExp[i].total %></td>
                       <td><%= creditExp[i].currentBalance %></td>
                       <td><%= creditExp[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" value="View"></td>
+                      <td><a href="/loans/id/<%= creditExp[i]._id %>" class="btn btn-info" role="button"> View </a></td>
                   </tr>
                 <% } %>
               </tbody>
@@ -159,7 +161,7 @@
                       <td><%= otherExp[i].total %></td>
                       <td><%= otherExp[i].currentBalance %></td>
                       <td><%= otherExp[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" value="View"></td>
+                      <td><a href="/loans/id/<%= otherExp[i]._id %>" class="btn btn-info" role="button"> View </a></td>
                   </tr>
                 <% } %>
               </tbody>

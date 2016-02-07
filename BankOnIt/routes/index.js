@@ -207,6 +207,12 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	//res.redirect('/csc369');
 });
 
+router.get('/DebtMarket', LoggedIn, function(req, res){
+	var loggedIn = logValue(req);
+	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn});
+});
+
+
 router.get('/logout', function(req,res){
 	req.logout();
 	res.redirect('/');
