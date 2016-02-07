@@ -207,6 +207,17 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	//res.redirect('/csc369');
 });
 
+router.get('/trade', function(req, res) {
+	var loggedIn = logValue(req);
+	if (!loggedIn)
+		res.redirect('/');
+	else {
+		loanCollection.find({product : "Mortgage", userID: {$not: req.user._id}}, function(req, res) {
+
+		})
+	}
+})
+
 router.get('/logout', function(req,res){
 	req.logout();
 	res.redirect('/');
@@ -248,6 +259,7 @@ router.post('/makeloan', function (req, res){
  		newloan.startDate = new Date().toDateString();
  		newloan.lastPaymentInterest = 0;
 		newloan.lastPaymentDate= newloan.startDate;
+		newloan.investmentIndex = 0;
 		newloan.currentBalance = newloan.total;
 		newloan.save();
 		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType, newloan.interestType);

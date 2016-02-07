@@ -19,6 +19,7 @@ var loansSchema = mongoose.Schema({
  currentBalance: Number,
  frequency: String,
  installmentSum: Number,
+ investmentIndex: Number,
  notes: String,
  history: Array
 });
