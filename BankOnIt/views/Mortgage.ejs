@@ -82,11 +82,11 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <img class="block" src="https://github.com/danhsiu/danhsiuliu/blob/master/images/carkey.jpg?raw=true" alt="" style="width:25px;height:25px;">
-              <a data-toggle="collapse" href="#collapse2">Credit Card Loans</a>   <!--NAMING-->
+              <a data-toggle="collapse" href="#collapse3">Credit Card Loans</a>   <!--NAMING-->
             </h4>
           </div>
 
-          <div id="collapse2" class="panel-collapse collapse">
+          <div id="collapse3" class="panel-collapse collapse">
             <!--<div class="panel-body">Panel Body</div>-->
             <table class="table table-hover">
               <thread>
@@ -114,11 +114,11 @@
           <div class="panel-heading">
             <h4 class="panel-title">
                    <img src="http://tradeoff-analytics-demo.mybluemix.net/images/app.png" alt="" style="width:25px; height:25px;">
-              <a data-toggle="collapse" href="#collapse3">Savings Analytics</a>   <!--NAMING-->
+              <a data-toggle="collapse" href="#collapse4">Savings Analytics</a>   <!--NAMING-->
             </h4>
           </div>
 
-          <div id="collapse3" class="panel-collapse collapse">
+          <div id="collapse4" class="panel-collapse collapse">
             <!--<div class="panel-body">Panel Body</div>-->
             <table class="table table-hover">
               <thread>
@@ -136,6 +136,38 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
+                      <td><input type="button" class="btn btn-info" value="View"></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel-heading">
+            <h4 class="panel-title">
+                   <img src="http://tradeoff-analytics-demo.mybluemix.net/images/app.png" alt="" style="width:25px; height:25px;">
+              <a data-toggle="collapse" href="#collapse5">Others</a>   <!--NAMING-->
+            </h4>
+          </div>
+
+          <div id="collapse5" class="panel-collapse collapse">
+            <!--<div class="panel-body">Panel Body</div>-->
+            <table class="table table-hover">
+              <thread>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Expected End Date</th>
+                </tr>
+              </thread>
+              <tbody>
+                <% for(var i=0; i<otherExp.length; i++) {%>
+                  <tr>
+                      <td><%= otherExp[i].name %></td>
+                      <td><%= otherExp[i].total %></td>
+                      <td><%= otherExp[i].currentBalance %></td>
+                      <td><%= otherExp[i].expectedEndDate %></td>
                       <td><input type="button" class="btn btn-info" value="View"></td>
                   </tr>
                 <% } %>
