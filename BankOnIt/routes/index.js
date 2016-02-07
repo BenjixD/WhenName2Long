@@ -90,6 +90,18 @@ router.get('/loans', LoggedIn, function(req, res){
 
 //res.redirect('/csc369');
 });
+//load each specific loan page
+router.get('/loans(/id/:id)?', LoggedIn, function(req, res){
+
+	var loggedIn = logValue(req);
+	var id = req.params.id;
+	console.log(id);
+
+	loanCollection.findOne({'_id': id}, function(err, data){
+		res.render('loaninfo', { title: data.name, loans: data, user: req.user, status: loggedIn });
+	});
+
+});
 
 router.post('/loans', function(req, res){
 	console.log('went to loans');
