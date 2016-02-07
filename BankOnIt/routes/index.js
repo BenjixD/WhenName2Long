@@ -158,6 +158,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	var ann_type = ['Annuity', 'Annuity Due'];
 	var fix_int = ['Yes', 'No'];
 	var freq = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
+	var loan_type = ['Mortgage', 'Car Insurance', 'Credit Card', 'Other'];
 
 	res.render('newloan', { title: "Request Loan",
 							user: req.user,
@@ -165,6 +166,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 							at : ann_type, 
 							fi : fix_int,
 							fe : freq,
+							it : loan_type,
 							status: loggedIn}); 
 	//res.redirect('/csc369');
 });
