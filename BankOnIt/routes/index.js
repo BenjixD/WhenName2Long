@@ -250,7 +250,7 @@ router.post('/requestconfirm', function(req, res) {
 		res.redirect('/');
 	}
 	else {
-		console.log("Requesting debt trade from: " req.user._id);
+		console.log("Requesting debt trade from: "+ req.user._id);
 		loanCollection.find({'product': 'Mortgage', 'userID': req.user._id}, function(err, data) {
 			if(err){
 				console.log("post(requesttrade) find returns error");
@@ -270,8 +270,8 @@ router.post('/posttrade', function(req, res){
 		res.redirect('/');
 	}
 	else {
-		console.log('Registering trade of debts ' + req.loan1 + ", " + req.loan2);
-		marketCollection.find({'loan1': {'$or': {req.loan1, req.loan2}}, 'loan2': {'$or': {req.loan1, req.loan2}}}, function(err, data) {
+		console.log('Registering trade of debts ' + req.body.loan1 + ", " + req.body.loan2);
+		marketCollection.find({'$or': [{'loan1' : req.body.loan1}, {'loan1' : req.body.loan2}, {'loan2' : req.body.loan1}, {'loan2' : req.body.loan2}]}, function(err, data) {
 			if(err) {
 				console.log("Error during debt trade registration");
 				throw err;
@@ -282,9 +282,18 @@ router.post('/posttrade', function(req, res){
 			}
 			else {
 				var tr = new marketCollection();
-				tr.loan1 = req.loan1;
-				tr.loan2 = req.loan2;
-				
+				tr.loan1 = req.body.loan1;
+				tr.loan2 = req.body.loan2;
+				tr.trader1 = req.body.loan1.userID;
+				tr.trader2 = req.body.loan2.userID;
+				tr.balance1 = req.body.loan1.currentBalance;
+				tr.balance2 = req.body.loan2.currentBalance;
+				tr.interestRate1 = req.body.loan1.interestRate;
+				tr.interestRate2 = req.body.loan2.interestRate;
+				tr.tradeInitDate = new Date().toDateString();
+				tr.accept1 = false;
+				tr.accept2 = false;
+				tr.status = "Pending";
 
 			}
 		})

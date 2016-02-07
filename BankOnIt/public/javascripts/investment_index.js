@@ -37,6 +37,8 @@ function depreciateIndex (loan) {
 	loan.save();
 }
 
+module.exports={initIndex, successUpIndex, depreciateIndex};
+
 // requestTrade gives all debt that are not user's
 
 //procedure: click trade to requestTrade

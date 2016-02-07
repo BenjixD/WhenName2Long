@@ -7,7 +7,7 @@ var marketSchema = mongoose.Schema({
 	trader1: String, 
 	trader2: String, 
 	tradeInitDate: String,
-	status: String // ongoing, complete, pending, etc?
+	status: String, // ongoing, complete, pending, etc?
 	balance1: Number, // numerical values of debt of respective traders
 	balance2: Number,
 	interestRate1: Number, // interest rate of respective debts
