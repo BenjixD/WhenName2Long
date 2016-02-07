@@ -31,6 +31,7 @@ router.post('/loans', function(req, res){
 	console.log("went to loans");
 });
 
+// ***************doesnt redirect when entered manually ***************
 router.get('/loans', LoggedIn, function(req, res){
 	
 	var mortgage = [], car = [], credit = [], other = [];
@@ -227,13 +228,14 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 });
 
 
+//************Does NOT REDIRECT WHEN NOT LOGGED IN *************
 router.get('/requesttrade', LoggedIn, function(req, res) {
-		var loggedIn = logValue(req);
+	var loggedIn = logValue(req);
 	if (!loggedIn)
 		res.redirect('/');
 	else {
-				loanCollection.find({product : "Mortgage", userID: {$not: req.user._id}}, function(err, data) {
-			res.render('', {title: "Trade Request", data: data , user: req.user, status: loggedIn});
+				loanCollection.find({'product' : "Mortgage", 'userID': {'$not': req.user._id}}, function(err, data) {
+			res.render('RequestTrade', {title: "Trade Request", loans: data , user: req.user, status: loggedIn});
 		});
 	}
 });
@@ -311,7 +313,7 @@ function LoggedIn(req, res, next) {
 	// Passport adds this method to request object. A middleware is allowed to add properties to
 	// request and response objects
 	if (req.isAuthenticated())
-		return next();
+		return next();s
 	// if the user is not authenticated then redirect him to the login page
 	res.redirect('/');
 }

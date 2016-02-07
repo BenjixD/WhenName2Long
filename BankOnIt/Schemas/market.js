@@ -16,6 +16,8 @@ var marketSchema = mongoose.Schema({
 	investmentIndex2: Number, // 10 not necessarily best, simply higher reward for its risk. Likewise -10 not necessarily worst
 	estimatedValue1: Number, // estimated market value of respective loan
 	estimatedValue2: Number,
+	accept1: Boolean, 
+	accept2: Boolean
 });
 
 module.exports = mongoose.model('DebtTransactions', marketSchema);
