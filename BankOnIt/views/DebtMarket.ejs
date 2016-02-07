@@ -26,22 +26,36 @@
             <table class="table table-hover">
               <thread>
                 <tr>
-                	<th>Debt Owner</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Balance</th>
-                    <th>Expected End Date</th>
+                	<th>First Loaner</th>
+                    <th>Second Loaner</th>
+                    <th>First Trader</th>
+                    <th>Second Trader</th>
+                    <th>Trade Inital Date</th>
+                    <th>Status</th>
+                    <th>Balance1</th>
+                    <th>Balance2</th>
+                    <th>First value</th>
+                    <th>Second value</th>
+                    <th>First accept</th>
+                    <th>Second accept</th>
                 </tr>
               </thread>
               <tbody>
                 <form action="/requestconfirm" method="POST">
                 <% for(var i=0; i<pending.length; i++) {%>
                   <tr>
-                      <td><%= pending[i].userID %></td>
-                      <td><%= pending[i].name %></td>
-                      <td><%= pending[i].total %></td>
-                      <td><%= pending[i].currentBalance %></td>
-                      <td><%= pending[i].expectedEndDate %></td>
+                      <td><%= pending[i].loan1 %></td>
+                      <td><%= pending[i].loan2 %></td>
+                      <td><%= pending[i].trader1 %></td>
+                      <td><%= pending[i].trader2 %></td>
+                      <td><%= pending[i].tradeInitDate %></td>
+                      <td><%= pending[i].status %></td>
+                      <td><%= pending[i].balance1 %></td>
+                      <td><%= pending[i].balance2 %></td>
+                      <td><%= pending[i].estimatedValue1 %></td>
+                      <td><%= pending[i].estimatedValue2 %></td>
+                      <td><%= pending[i].accept1 %></td>
+                      <td><%= pending[i].accept2 %></td>
                       <td><input type="button" class="btn btn-info" value="Yes"></td>
                   </tr>
                 <% } %>
@@ -62,22 +76,36 @@
             <table class="table table-hover">
               <thread>
                 <tr>
-                	<th>Debt Owner</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Balance</th>
-                    <th>Expected End Date</th>
+                  <th>First Loaner</th>
+                    <th>Second Loaner</th>
+                    <th>First Trader</th>
+                    <th>Second Trader</th>
+                    <th>Trade Inital Date</th>
+                    <th>Status</th>
+                    <th>Balance1</th>
+                    <th>Balance2</th>
+                    <th>First value</th>
+                    <th>Second value</th>
+                    <th>First accept</th>
+                    <th>Second accept</th>
                 </tr>
               </thread>
               <tbody>
                 <form action="/requestconfirm" method="POST">
                 <% for(var i=0; i<confirm.length; i++) {%>
                   <tr>
-                      <td><%= confirm[i].userID %></td>
-                      <td><%= confirm[i].name %></td>
-                      <td><%= confirm[i].total %></td>
-                      <td><%= confirm[i].currentBalance %></td>
-                      <td><%= confirm[i].expectedEndDate %></td>
+                      <td><%= confirm[i].loan1 %></td>
+                      <td><%= confirm[i].loan2 %></td>
+                      <td><%= confirm[i].trader1 %></td>
+                      <td><%= confirm[i].trader2 %></td>
+                      <td><%= confirm[i].tradeInitDate %></td>
+                      <td><%= confirm[i].status %></td>
+                      <td><%= confirm[i].balance1 %></td>
+                      <td><%= confirm[i].balance2 %></td>
+                      <td><%= confirm[i].estimatedValue1 %></td>
+                      <td><%= confirm[i].estimatedValue2 %></td>
+                      <td><%= confirm[i].accept1 %></td>
+                      <td><%= confirm[i].accept2 %></td>
                       <td><input type="button" class="btn btn-info" value="Trade"></td>
                   </tr>
                 <% } %>
@@ -98,22 +126,36 @@
             <table class="table table-hover">
               <thread>
                 <tr>
-                	<th>Debt Owner</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Balance</th>
-                    <th>Expected End Date</th>
+                  <th>First Loaner</th>
+                    <th>Second Loaner</th>
+                    <th>First Trader</th>
+                    <th>Second Trader</th>
+                    <th>Trade Inital Date</th>
+                    <th>Status</th>
+                    <th>Balance1</th>
+                    <th>Balance2</th>
+                    <th>First value</th>
+                    <th>Second value</th>
+                    <th>First accept</th>
+                    <th>Second accept</th>
                 </tr>
               </thread>
               <tbody>
                 <form action="/requestconfirm" method="POST">
                 <% for(var i=0; i<ongoing.length; i++) {%>
                   <tr>
-                      <td><%= ongoing[i].userID %></td>
-                      <td><%= ongoing[i].name %></td>
-                      <td><%= ongoing[i].total %></td>
-                      <td><%= ongoing[i].currentBalance %></td>
-                      <td><%= ongoing[i].expectedEndDate %></td>
+                      <td><%= ongoing[i].loan1 %></td>
+                      <td><%= ongoing[i].loan2 %></td>
+                      <td><%= ongoing[i].trader1 %></td>
+                      <td><%= ongoing[i].trader2 %></td>
+                      <td><%= ongoing[i].tradeInitDate %></td>
+                      <td><%= ongoing[i].status %></td>
+                      <td><%= ongoing[i].balance1 %></td>
+                      <td><%= ongoing[i].balance2 %></td>
+                      <td><%= ongoing[i].estimatedValue1 %></td>
+                      <td><%= ongoing[i].estimatedValue2 %></td>
+                      <td><%= ongoing[i].accept1 %></td>
+                      <td><%= ongoing[i].accept2 %></td>
                   </tr>
                 <% } %>
                 </form>

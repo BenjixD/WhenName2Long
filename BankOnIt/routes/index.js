@@ -318,9 +318,9 @@ router.post('/posttrade/ids/(:id1/:id2)?', function(req, res){
 				console.log("Error during debt trade registration");
 				throw err;
 			}
-			if (data == []) {
+			if (data.length != 0) {
 				console.log("Trade between the chosen debt already exists!");
-				//res.redirect('/requesttrade');
+				res.redirect('/requesttrade');
 			}
 			else {
 				loanCollection.findOne({'_id': req.params.id1}, function(err, traderOne){
