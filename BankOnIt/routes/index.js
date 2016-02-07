@@ -42,7 +42,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
-				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType, data[i].interestType);
 				data[i].save();
 				mortgage.push(data[i]);
 			}
@@ -55,7 +55,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
-				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType, data[i].interestType);
 				data[i].save();
 				car.push(data[i]);
 			}
@@ -67,7 +67,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
-				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType, data[i].interestType);
 				data[i].save();
 				credit.push(data[i]);
 			}
@@ -79,7 +79,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
-				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType, data[i].interestType);
 				data[i].save();
 				other.push(data[i]);
 			}
