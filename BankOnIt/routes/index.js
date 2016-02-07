@@ -35,17 +35,10 @@ router.get('/loans', LoggedIn, function(req, res){
 	
 	var listofLoans = [];
 	var loggedIn = logValue(req);
+	console.log(req.user._id);
 	
-	loanCollection.find({'userID': req.user_id}, function(err, data) {
+	loanCollection.find({'userID': req.user._id}, function(err, data) {
 		
-		for (i = 0; i < data.length; i++) {
-			console.log(data[i]);
-		}
-
-		if(data.length == 0){
-			console.log("Nothing to display");
-		}
-		else{
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
@@ -53,7 +46,7 @@ router.get('/loans', LoggedIn, function(req, res){
 				data[i].save();
 				listofLoans.push(data[i]);
 			}
-		}
+		
 		res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
 		/* test
 		*/
@@ -220,6 +213,7 @@ router.post('/makeloan', function (req, res){
 		newloan.save();
 		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
 		newloan.save();
+		res.redirect("/loans");
 	});
 
 });
