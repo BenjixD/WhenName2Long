@@ -38,3 +38,8 @@ function depreciateIndex (loan) {
 }
 
 // requestTrade gives all debt that are not user's
+
+//procedure: click trade to requestTrade
+// goes to page to select one of own debts to trade, then confirm
+// if successful, then create market db entry + post trade to debt market
+// 

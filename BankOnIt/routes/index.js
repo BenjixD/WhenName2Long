@@ -2,6 +2,7 @@ var express = require('express');
 var user_db = require('../Schemas/user.js');
 var loanCollection = require('../Schemas/loans.js');
 var calc = require('../public/javascripts/loan_calculator.js')
+var marketCollection = require('../Schemas/market.js');
 var router = express.Router();
 
 module.exports = function(passport){
@@ -234,11 +235,61 @@ router.get('/requesttrade', LoggedIn, function(req, res) {
 	if (!loggedIn)
 		res.redirect('/');
 	else {
-				loanCollection.find({'product' : "Mortgage", 'userID': {'$not': req.user._id}}, function(err, data) {
-			res.render('RequestTrade', {title: "Trade Request", loans: data , user: req.user, status: loggedIn});
+			loanCollection.find({'product' : "Mortgage", 'userID': {'$ne': req.user._id}}, function(err, data) {
+				if(err){
+					console.log("get(requesttrade) find returns error");
+					throw err;
+				}
+				res.render('RequestTrade', {title: "Trade Request", loans: data , user: req.user, status: loggedIn});
 		});
 	}
 });
+
+router.post('/requestconfirm', function(req, res) {
+	if(req.user == null){
+		res.redirect('/');
+	}
+	else {
+		console.log("Requesting debt trade from: " req.user._id);
+		loanCollection.find({'product': 'Mortgage', 'userID': req.user._id}, function(err, data) {
+			if(err){
+				console.log("post(requesttrade) find returns error");
+				throw err;
+			}
+			// Render different page if can't make Request Trade do both things
+			res.render('RequestTrade', {title: "What to Trade For?", loans: data, user: req.user, status: loggedIn})
+		})
+	}
+	
+
+});
+
+router.post('/posttrade', function(req, res){
+	if(req.user == null) {
+		console.log("Guest tried to enter /posttrade");
+		res.redirect('/');
+	}
+	else {
+		console.log('Registering trade of debts ' + req.loan1 + ", " + req.loan2);
+		marketCollection.find({'loan1': {'$or': {req.loan1, req.loan2}}, 'loan2': {'$or': {req.loan1, req.loan2}}}, function(err, data) {
+			if(err) {
+				console.log("Error during debt trade registration");
+				throw err;
+			}
+			if (data) {
+				console.log("Trade between the chosen debt already exists!");
+				res.redirect('/requesttrade');
+			}
+			else {
+				var tr = new marketCollection();
+				tr.loan1 = req.loan1;
+				tr.loan2 = req.loan2;
+				
+
+			}
+		})
+	}
+})
 
 router.get('/logout', function(req,res){
 	req.logout();

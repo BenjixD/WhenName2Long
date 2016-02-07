@@ -32,12 +32,12 @@
               <tbody>
                 <% for(var i=0; i<loans.length; i++) {%>
                   <tr>
-                      <td><%= loans[i].username %></td>
+                      <td><%= loans[i].userID %></td>
                       <td><%= loans[i].name %></td>
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" value="Trade"></td>
+                      <td><input type="button" class="btn btn-info" action="/requestconfirm" method="POST" value="Trade"></td>
                   </tr>
                 <% } %>
               </tbody>
