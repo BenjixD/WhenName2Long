@@ -33,7 +33,7 @@ router.post('/loans', function(req, res){
 
 router.get('/loans', LoggedIn, function(req, res){
 	
-	var mortgageLoans = [], carLoans = [], creditCardLoans = [], otherLoans = [];
+	var mortgage = [], car = [], credit = [], other = [];
 	var loggedIn = logValue(req);
 	console.log(req.user._id);
 	
@@ -44,32 +44,32 @@ router.get('/loans', LoggedIn, function(req, res){
 				console.log("Pushing data to array");
 				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
 				data[i].save();
-				mortgageLoans.push(data[i]);
+				mortgage.push(data[i]);
 			}
 
 	});
-	//console.log(mortgageLoans[0].name);
+	//console.log(mortgage[0].name);
 	
-		loanCollection.find({'userID': req.user._id, 'product':'Car Loans'}, function(err, data) {
+		loanCollection.find({'userID': req.user._id, 'product':'Car'}, function(err, data) {
 		
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
 				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
 				data[i].save();
-				carLoans.push(data[i]);
+				car.push(data[i]);
 			}
 
 	});
 	
-		loanCollection.find({'userID': req.user._id, 'product': 'Credit Card Loans' }, function(err, data) {
+		loanCollection.find({'userID': req.user._id, 'product': 'Credit' }, function(err, data) {
 		
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
 				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
 				data[i].save();
-				creditCardLoans.push(data[i]);
+				credit.push(data[i]);
 			}
 		
 	});
@@ -81,10 +81,10 @@ router.get('/loans', LoggedIn, function(req, res){
 				console.log("Pushing data to array");
 				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
 				data[i].save();
-				otherLoans.push(data[i]);
+				other.push(data[i]);
 			}
 		
-		res.render('Mortgage', { title:'Loans', loans: mortgageLoans , carExp: carLoans, creditExp: creditCardLoans, otherExp: otherLoans, user: req.user, status: loggedIn });
+		res.render('Mortgage', { title:'Loans', loans: mortgage, carExp: car, creditExp: credit, otherExp: other, user: req.user, status: loggedIn });
 	});
 	
 
@@ -191,7 +191,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	var loggedIn = logValue(req);
 
 	var int_type = ['Flat','Simple','Compound'];
-	var ann_type = ['Annuity', 'Annuity Due'];
+	var ann_type = ['Annuity', 'Annuity_Due'];
 	var fix_int = ['Yes', 'No'];
 	var freq = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 	var loan_type = ["Mortgage Loans", "Car Loans", "Credit Card Loans", "Others"];
