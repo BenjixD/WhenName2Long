@@ -9,8 +9,8 @@
 
 <body style="background-color:#EAEAEA;">
 <div id="container1">
-	<div class="jumbotron" id="body1">
-		<div class="panel-heading">
+  <div class="jumbotron" id="body1">
+    <div class="panel-heading">
             <h4 class="panel-title contanier">
               <a data-toggle="collapse" href="#collapse1">Mortgage Loans</a>   <!--NAMING-->
             </h4>
@@ -22,7 +22,7 @@
             <table class="table table-hover">
               <thread>
                 <tr>
-                	<th>Debt Owner</th>
+                  <th>Debt Owner</th>
                     <th>Description</th>
                     <th>Amount</th>
                     <th>Balance</th>
@@ -30,7 +30,7 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/requestconfirm" method="POST">
+                <form action="/posttrade" method="POST">
                 <% for(var i=0; i<loans.length; i++) {%>
                   <tr>
                       <td><%= loans[i].userID %></td>
@@ -38,14 +38,14 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" name="buddy" value=<%= loans[i] %>>Trade</input></td>
+                      <td><input type="Submit" class="btn btn-info" name="buddy" value=<%= loans[i] %> >Trade</td>
                   </tr>
                 <% } %>
                 </form>
               </tbody>
             </table>
           </div>
-	</div>
+  </div>
 <%- include footerNavigator.ejs %>
 </div>
 </body>

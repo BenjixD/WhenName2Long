@@ -224,8 +224,43 @@ router.get('/makeloan', LoggedIn, function(req, res){
 
 
 router.get('/debtmarket', LoggedIn, function(req, res){
+
+	var pending = [], confirmed = [], ongoing = [];
 	var loggedIn = logValue(req);
-	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn});
+
+	if (!loggedIn)
+		res.redirect('/');
+	else
+	{
+		marketCollection.find({'trader1': req.user._id, 'status' : 'Pending'}, function(err, data) {
+			if(err){
+				console.log("get(debtmarket) find returns error");
+				throw err;
+			}
+
+		pending = data;
+		});
+
+		marketCollection.find({'trader2' : req.user._id, 'status' : 'Pending'}, function(err, data) {
+			if(err){
+				console.log("get(debtmarket) find returns error");
+				throw err;
+			}
+
+		confirmed = data;
+		});
+
+		marketCollection.find({'$or' : [{'trader1' : req.user._id}, {'trader2' : req.user._id}], 'status' : 'Ongoing'}, function(err, data) {
+			if(err){
+				console.log("get(debtmarket) find returns error");
+				throw err;
+			}
+
+		ongoing = data;
+		});
+
+		res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirmed: confirmed, ongoing: ongoing});
+	}	
 });
 
 
@@ -257,7 +292,7 @@ router.post('/requestconfirm', function(req, res) {
 				throw err;
 			}
 			// Render different page if can't make Request Trade do both things
-			res.render('RequestTrade', {title: "What to Trade For?", loans: data, user: req.user, status: loggedIn})
+			res.render('RequestTrade', {title: "What to Trade For?", loan1: data, user: req.user, status: loggedIn, loan2: req.body.buddy})
 		})
 	}
 	
