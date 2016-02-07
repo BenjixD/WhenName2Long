@@ -9,11 +9,12 @@
 
 <body style="background-color:#EAEAEA;">
 <div id="container1">
-	<div id="body1">
+	<div class="container" id="body1">
 		<h1>Loan Request Form</h1>
-		<form class="form-horizontal" role="form" style="width: 50%;" action = "/makeloan" method = "POST">
+		<p>Fill in the form to request a loan.</p>
+		<form class="form-horizontal" role="form" style="width: 80%;" action = "/makeloan" method = "POST">
     	<div class="form-group">
-		    <label for="name" class="col-sm-2 control-label">Enter Name of the Loan:</label>
+		    <label for="name" class="col-sm-2 control-label">Name of the Loan:</label>
 		    <div class="col-sm-10">
 		            <input type="text" class="form-control" id="name" name="name" required>
 		    </div>
@@ -21,7 +22,7 @@
     	<div class="form-group">
 		    <label for="interestType" class="col-sm-2 control-label">Interest Type</label>
 		    <div class="col-sm-10">
-				<select name="interestType" style="word-wrap:break-word;width:100%;">
+				<select name="interestType">
 		        	<% for(var i=0; i<it.length; i++) {%>
 		        		<option value=<%= it[i] %> > <%= it[i] %> </option>
 		        	<%}%>
@@ -29,7 +30,7 @@
         	</div>
     	</div>
     	<div class="form-group">
-		    <label for="interestRate" class="col-sm-2 control-label">Enter the Interest Rate:</label>
+		    <label for="interestRate" class="col-sm-2 control-label">Interest Rate:</label>
 		    <div class="col-sm-10">
 		            <input type="text" class="form-control" id="interestRate" name="interestRate">
 		    </div>
