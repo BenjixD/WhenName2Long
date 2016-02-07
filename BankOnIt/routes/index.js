@@ -33,24 +33,59 @@ router.post('/loans', function(req, res){
 
 router.get('/loans', LoggedIn, function(req, res){
 	
-	var listofLoans = [];
+	var mortgageLoans = [], carLoans = [], creditCardLoans = [], otherLoans = [];
 	var loggedIn = logValue(req);
 	console.log(req.user._id);
 	
-	loanCollection.find({'userID': req.user._id}, function(err, data) {
+	loanCollection.find({'userID': req.user._id, 'product': 'Mortgage Loans'}, function(err, data) {
 		
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
 				console.log("Pushing data to array");
 				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
 				data[i].save();
-				listofLoans.push(data[i]);
+				mortgageLoans.push(data[i]);
+			}
+
+	});
+	
+		loanCollection.find({'userID': req.user._id, 'product':'Car Loans'}, function(err, data) {
+		
+			for(i = 0; i < data.length; i++){
+				// recalculate listofLoans' expectedEndDate
+				console.log("Pushing data to array");
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].save();
+				carLoans.push(data[i]);
+			}
+
+	});
+	
+		loanCollection.find({'userID': req.user._id, 'product': 'Credit Card Loans' }, function(err, data) {
+		
+			for(i = 0; i < data.length; i++){
+				// recalculate listofLoans' expectedEndDate
+				console.log("Pushing data to array");
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].save();
+				creditCardLoans.push(data[i]);
 			}
 		
-		res.render('Mortgage', { title:'Loans', loans:listofLoans, user: req.user, status: loggedIn });
-		/* test
-		*/
 	});
+	
+		loanCollection.find({'userID': req.user._id, 'product': 'Others'}, function(err, data) {
+		
+			for(i = 0; i < data.length; i++){
+				// recalculate listofLoans' expectedEndDate
+				console.log("Pushing data to array");
+				data[i].expectedEndDate = calc.expected_loan_completion(new Date(data[i].lastPaymentDate), data[i].interestRate, data[i].installmentSum, data[i].currentBalance, data[i].frequency, data[i].annuityType);
+				data[i].save();
+				otherLoans.push(data[i]);
+			}
+		
+		res.render('Mortgage', { title:'Loans', loans: mortgageLoans , carExp: carLoans, creditExp: creditCardLoans, otherExp: otherLoans, user: req.user, status: loggedIn });
+	});
+	
 
 //res.redirect('/csc369');
 });

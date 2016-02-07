@@ -8,6 +8,7 @@ var loansSchema = mongoose.Schema({
  interestRate: Number,
  annuityType: String,
  fixedInterest: Boolean,
+ product: String,
  fees: Number,
  purpose: String,
  startDate: String,
