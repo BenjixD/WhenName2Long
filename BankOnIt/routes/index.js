@@ -225,40 +225,37 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 	var pending = [], confirm = [], ongoing = [];
 	var loggedIn = logValue(req);
 
-	if (!loggedIn)
-		res.redirect('/');
-	else
-	{
-		marketCollection.find({'trader1': req.user._id, 'status' : 'Pending'}, function(err, data) {
-			if(err){
-				console.log("get(debtmarket) find returns error");
-				throw err;
-			}
+	
+	marketCollection.find({'trader1': req.user._id, 'status' : 'Pending'}, function(err, data) {
+		if(err){
+			console.log("get(debtmarket) find returns error");
+			throw err;
+		}
 
-		console.log("ooooooo0o0o0o0");
-		pending = data;
-		});
+	console.log("ooooooo0o0o0o0");
+	pending = data;
+	});
 
-		marketCollection.find({'trader2' : req.user._id, 'status' : 'Pending'}, function(err, data) {
-			if(err){
-				console.log("get(debtmarket) find returns error");
-				throw err;
-			}
+	marketCollection.find({'trader2' : req.user._id, 'status' : 'Pending'}, function(err, data) {
+		if(err){
+			console.log("get(debtmarket) find returns error");
+			throw err;
+		}
 
-		confirm = data;
-		});
+	confirm = data;
+	});
 
-		marketCollection.find({'$or' : [{'trader1' : req.user._id}, {'trader2' : req.user._id}], 'status' : 'Ongoing'}, function(err, data) {
-			if(err){
-				console.log("get(debtmarket) find returns error");
-				throw err;
-			}
+	marketCollection.find({'$or' : [{'trader1' : req.user._id}, {'trader2' : req.user._id}], 'status' : 'Ongoing'}, function(err, data) {
+		if(err){
+			console.log("get(debtmarket) find returns error");
+			throw err;
+		}
 
-		ongoing = data;
-		});
+	ongoing = data;
+	});
 
-		res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirm: confirm, ongoing: ongoing});
-	}	
+	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirm: confirm, ongoing: ongoing});
+		
 });
 
 
@@ -304,46 +301,55 @@ router.get('/requestconfirm(/id/:id)?', LoggedIn, function(req, res) {
 	});
 });
 //'/posttrade/ids/(:ids/:ids)?'
+//'/posttrade/ids/56b6acd99ce00d3d327b7f47/56b6f5779ef9da155d3e5617'
+router.post('/posttrade/ids/(:id1/:id2)?', function(req, res){
 
-router.post('/posttrade/ids/56b7755afebb5ece160cad5e/56b761a4d01dffe515a6065f', function(req, res){
-	console.log(req.originalUrl);
-	console.log(req.params.id);
+	//console.log(req.params.id1);
+	//console.log(req.params.id2);
 	if(req.user == null) {
 		console.log("Guest tried to enter /posttrade");
 		res.redirect('/');
 	}
 	else {
-		console.log('Registering trade of debts ' + '56b7755afebb5ece160cad5e' + ", " + '56b761a4d01dffe515a6065f');
-		marketCollection.find({'$or': [{'loan1' : '56b7755afebb5ece160cad5e'}, {'loan1' : '56b761a4d01dffe515a6065f'}],'$or' : [{'loan2' : '56b7755afebb5ece160cad5e'}, {'loan2' : '56b761a4d01dffe515a6065f'}]}, function(err, data) {
+		console.log('Registering trade of debts ' + req.params.id1 + ", " + req.params.id2);
+		marketCollection.find({'$or': [{'loan1' : req.params.id1}, {'loan1' : req.params.id2}],'$or' : [{'loan2' : req.params.id1}, {'loan2' : req.params.id2}]}, function(err, data) {
+			console.log(data);
 			if(err) {
 				console.log("Error during debt trade registration");
 				throw err;
 			}
-			if (data) {
+			if (data == []) {
 				console.log("Trade between the chosen debt already exists!");
-				res.redirect('/requesttrade');
+				//res.redirect('/requesttrade');
 			}
 			else {
-				var tr = new marketCollection();
-				tr.loan1 = req.body.loan1;
-				tr.loan2 = req.body.loan2;
-				tr.trader1 = req.body.loan1.userID;
-				tr.trader2 = req.body.loan2.userID;
-				tr.balance1 = req.body.loan1.currentBalance;
-				tr.balance2 = req.body.loan2.currentBalance;
-				tr.interestRate1 = req.body.loan1.interestRate;
-				tr.interestRate2 = req.body.loan2.interestRate;
-				tr.tradeInitDate = new Date().toDateString();
-				tr.accept1 = false;
-				tr.accept2 = false;
-				tr.status = "Pending";
-				tr.save();
-				res.redirect('/debtmarket');
+				loanCollection.findOne({'_id': req.params.id1}, function(err, traderOne){
 
+					loanCollection.findOne({'_id': req.params.id2}, function(err, traderTwo){
+
+					var tr = new marketCollection();
+					tr.loan1 = req.params.id1
+					tr.loan2 = req.params.id2
+					tr.trader1 = traderOne.userID;
+					tr.trader2 = traderTwo.userID;
+					tr.balance1 = traderOne.currentBalance;
+					tr.balance2 = traderTwo.currentBalance;
+					tr.interestRate1 = traderOne.interestRate;
+					tr.interestRate2 = traderTwo.interestRate;
+					tr.tradeInitDate = new Date().toDateString();
+					tr.accept1 = false;
+					tr.accept2 = false;
+					tr.status = "Pending";
+					tr.save();
+					res.redirect('/debtmarket');
+					});
+				});
 			}
 		});
 	}
 });
+
+
 
 router.get('/logout', function(req,res){
 	req.logout();
