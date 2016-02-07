@@ -225,7 +225,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 
 router.get('/debtmarket', LoggedIn, function(req, res){
 
-	var pending = [], confirmed = [], ongoing = [];
+	var pending = [], confirm = [], ongoing = [];
 	var loggedIn = logValue(req);
 
 	if (!loggedIn)
@@ -238,6 +238,7 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 				throw err;
 			}
 
+		console.log("ooooooo0o0o0o0");
 		pending = data;
 		});
 
@@ -247,7 +248,7 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 				throw err;
 			}
 
-		confirmed = data;
+		confirm = data;
 		});
 
 		marketCollection.find({'$or' : [{'trader1' : req.user._id}, {'trader2' : req.user._id}], 'status' : 'Ongoing'}, function(err, data) {
@@ -259,11 +260,12 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 		ongoing = data;
 		});
 
-		res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirmed: confirmed, ongoing: ongoing});
+		res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirm: confirm, ongoing: ongoing});
 	}	
 });
 
 
+//PROBLEM****************
 //************Does NOT REDIRECT WHEN NOT LOGGED IN *************
 router.get('/requesttrade', LoggedIn, function(req, res) {
 	var loggedIn = logValue(req);
