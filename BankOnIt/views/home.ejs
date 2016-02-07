@@ -20,18 +20,33 @@
 	    <h1>Welcome to <strong><em>Bank On It</em></strong></h1>
 	   <p>Many of us start our careers with the future in mind. Assess your current financial situation with our debt reduction solutions to help you plan for the future.</p>
 	    <p>Explore our loan calculator to get a picture for paying down your debts faster, consildate potential cost saving solutions, and increasing your cash flow.</p>
-		<form action="/" method="POST" role="form">
-	    <div class="form">
-	        <div class="col-sm-1">
-	            <button type="submit" id="signin" name="sign" value="/login" class="btn btn-primary">Sign In</button>
-	        </div>
-    	</div>
-    	<div class="form">
-    		<div class="col-sm-1">
-	            <button type="submit" id="signup" name="sign" value="/signup" class="btn btn-primary">Sign Up</button>
-	        </div>
-	    </div>
-		</form>
+        <% if(status){%> 
+          <form action="/" method="POST" role="form">
+            <div class="form">
+                <div class="col-sm-1">
+                    <button type="submit" id="signin" name="sign" value="/login" class="btn btn-primary" style="visibility: hidden">Sign In</button>
+                </div>
+            </div>
+            <div class="form">
+              <div class="col-sm-1">
+                    <button type="submit" id="signup" name="sign" value="/signup" class="btn btn-primary" style="visibility: hidden">Sign Up</button>
+                </div>
+            </div>
+          </form>
+        <%}else{%>
+          <form action="/" method="POST" role="form">
+            <div class="form">
+                <div class="col-sm-1">
+                    <button type="submit" id="signin" name="sign" value="/login" class="btn btn-primary" style="visibility: visible">Sign In</button>
+                </div>
+            </div>
+            <div class="form">
+              <div class="col-sm-1">
+                    <button type="submit" id="signup" name="sign" value="/signup" class="btn btn-primary" style="visibility: visible">Sign Up</button>
+                </div>
+            </div>
+          </form>
+        <%}%>
 	</div>
 	</div>
 <%- include footernavigator.ejs %>

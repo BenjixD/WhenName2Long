@@ -9,11 +9,12 @@
 
 <body style="background-color:#EAEAEA;">
 <div id="container1">
-<div class="jumbotron" id="body1">
-		<div class="container">
-			<h1>Debt Market</h1>
-			<p></p>
-			<div class="panel-heading">
+  <div class="container">
+      <h1>Debt Market</h1>
+      <p></p>
+      <div class="panel-group" id="body1">
+      <div class="panel panel-default " >
+			    <div class="panel-heading">
             <h4 class="panel-title contanier">
               <a data-toggle="collapse" href="#collapse1">My Pending Trade</a>   <!--NAMING-->
             </h4>
@@ -49,7 +50,7 @@
             </table>
           </div>
 
-		  <div class="panel-heading">
+		      <div class="panel-heading">
             <h4 class="panel-title contanier">
               <a data-toggle="collapse" href="#collapse2">Trading Confirmation</a>   <!--NAMING-->
             </h4>
@@ -119,16 +120,10 @@
               </tbody>
             </table>
           </div>
-
+        </div>
 	</div>
-<%- include footerNavigator.ejs %>
-</div>
-</body>
-</html>
-
-	</div>
-</div>
-<%- include footerNavigator.ejs %>
+  </div>
+  <%- include footerNavigator.ejs %>
 </div>
 </body>
 </html>

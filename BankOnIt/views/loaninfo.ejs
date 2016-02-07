@@ -7,25 +7,27 @@
 <div id="container1">
   <div id="body1">
   	<h1 class="container">Loan Details</h1>
-  	<p> 
-  		Loan:<td><%= loans.name %></td><br/>
-	  	Status:<td><%= loans.status %></td><br/>
-	  	Interest Type:<td><%= loans.interestType %></td><br/>
-	  	Interest Rate:<td><%= loans.interestRate %></td><br/>
-	  	Annuity Type:<td><%= loans.annuityType %></td><br/>
-	  	Fixed Interest:<td><%= loans.fixedInterest %></td><br/>
-	  	Service Fees:<td><%= loans.fees %></td><br/>
-	  	Start Date:<td><%= loans.startDate %></td><br/>
-	  	Expected End Date:<td><%= loans.expectedEndDate %></td><br/>
-	  	Last Payment Date:<td><%= loans.lastPaymentDate %></td><br/>
-	  	Last Payment Interest:<td><%= loans.lastPaymentInterest %></td><br/>
-	  	Total Loan Amount:<td><%= loans.total %></td><br/>
-	  	Current Balance:<td><%= loans.currentBalance %></td><br/>
-	  	Frequency:<td><%= loans.frequency %></td><br/>
-	  	Installment:<td><%= loans.installmentSum %></td><br/>
-	  	Notes:<td><%= loans.notes %></td><br/>
-	  	Purpose<td><%= loans.purpose %></td>
-  </p>
+  	<table class="table table-hover" style="max-width:300px;">
+        <thread>
+            <tr><th style="text-align: right;">Loan</th><td><%= loans.name %></td></tr>
+            <tr><th style="text-align: right;">Status</th><td><%= loans.status %></td></tr>
+            <tr><th style="text-align: right;">Interest Type</th><td><%= loans.interestType %></td></tr>
+            <tr><th style="text-align: right;">Interest Rate</th><td><%= loans.interestRate %></td></tr>
+            <tr><th style="text-align: right;">Annuity Type</th><td><%= loans.annuityType %></td></tr>
+            <tr><th style="text-align: right;">Fixed Interest</th><td><%= loans.fixedInterest %></td></tr>
+            <tr><th style="text-align: right;">Service Fees</th><td><%= loans.fees %></td></tr>
+            <tr><th style="text-align: right;">Start Date</th><td><%= loans.startDate %></td></tr>
+            <tr><th style="text-align: right;">Expected End Date</th><td><%= loans.expectedEndDate %></td></tr>
+            <tr><th style="text-align: right;">Last Payment Date</th><td><%= loans.lastPaymentDate %></td></tr>
+            <tr><th style="text-align: right;">Last Payment Interest</th><td><%= loans.lastPaymentInterest %></td></tr>
+            <tr><th style="text-align: right;">Total Loan Amount</th><td><%= loans.total %></td></tr>
+            <tr><th style="text-align: right;">Current Balance</th><td><%= loans.currentBalance %></td></tr>
+            <tr><th style="text-align: right;">Frequency</th><td><%= loans.frequency %></td></tr>
+            <tr><th style="text-align: right;">Installment</th><td><%= loans.installmentSum %></td></tr>
+            <tr><th style="text-align: right;">Notes</th><td><%= loans.notes %></td></tr>
+            <tr><th style="text-align: right;">Purpose</th><td><%= loans.purpose %></td></tr>
+        </thread>
+    </table>
   </div>
   <%- include footerNavigator.ejs %>
 </div>
