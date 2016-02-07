@@ -41,7 +41,6 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/debtmarket" method="POST">
                 <% for(var i=0; i<pending.length; i++) {%>
                   <tr>
                       <td><%= pending[i].loan1 %></td>
@@ -56,10 +55,8 @@
                       <td><%= pending[i].estimatedValue2 %></td>
                       <td><%= pending[i].accept1 %></td>
                       <td><%= pending[i].accept2 %></td>
-                      <td><input type="button" class="btn btn-info" value="Yes"></td>
                   </tr>
                 <% } %>
-                </form>
               </tbody>
             </table>
           </div>
@@ -91,7 +88,7 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/debtmarket" method="POST">
+
                 <% for(var i=0; i<confirm.length; i++) {%>
                   <tr>
                       <td><%= confirm[i].loan1 %></td>
@@ -106,10 +103,8 @@
                       <td><%= confirm[i].estimatedValue2 %></td>
                       <td><%= confirm[i].accept1 %></td>
                       <td><%= confirm[i].accept2 %></td>
-                      <td><input type="button" class="btn btn-info" value="Trade"></td>
                   </tr>
                 <% } %>
-                </form>
               </tbody>
             </table>
           </div>
@@ -141,8 +136,7 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/debtmarket" method="POST">
-                <% for(var i=0; i<ongoing.length; i++) {%>
+               <% for(var i=0; i<ongoing.length; i++) {%>
                   <tr>
                       <td><%= ongoing[i].loan1 %></td>
                       <td><%= ongoing[i].loan2 %></td>
@@ -158,7 +152,6 @@
                       <td><%= ongoing[i].accept2 %></td>
                   </tr>
                 <% } %>
-                </form>
               </tbody>
             </table>
           </div>
