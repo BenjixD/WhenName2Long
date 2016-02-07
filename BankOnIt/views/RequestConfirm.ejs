@@ -30,18 +30,19 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/posttrade" method="POST">
-                <% for(var i=0; i<loans.length; i++) {%>
+                <% for(var i=0; i<loan1.length; i++) {%>
+                  <form action="/posttrade" method="POST">
                   <tr>
-                      <td><%= loans[i].userID %></td>
-                      <td><%= loans[i].name %></td>
-                      <td><%= loans[i].total %></td>
-                      <td><%= loans[i].currentBalance %></td>
-                      <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="Submit" class="btn btn-info" name="buddy" value=<%= loans[i] %> >Trade</td>
+                      <td><%= loan1[i].userID %></td>
+                      <td><%= loan1[i].name %></td>
+                      <td><%= loan1[i].total %></td>
+                      <td><%= loan1[i].currentBalance %></td>
+                      <td><%= loan1[i].expectedEndDate %></td> 
+                      <td><button type="submit" class="btn btn-success btn-md"> Confirm </button></td>                
                   </tr>
-                <% } %>
                 </form>
+                <% } %>
+              
               </tbody>
             </table>
           </div>

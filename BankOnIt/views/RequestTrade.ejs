@@ -40,7 +40,8 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><a href="/requestconfirm/<%= loans[i]._id %>" class="btn btn-info" role="button"> Trade </a></td>
+                      <td><%= loans[i]._id %></td>
+                      <td><a href="/requestconfirm/id/<%= loans[i]._id %>" class="btn btn-info" role="button"> Trade </a></td>
                   </tr>
                 <% } %>
                 </form>
