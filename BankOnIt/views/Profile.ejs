@@ -10,15 +10,19 @@
 <body style="background-color:#EAEAEA;">
 <div id="container1">
 	<div class="container" id="body1">
-		<div style="background-color:White;">
-		<h1>Your Profile :)</h1>
-		<h3><span class="fa fa-user">User</span></h3>
+		<!--<div style="background-color:White;">-->
+		<h1><strong>PROFILE</strong></h1>
 		<p>
-			First Name: <%= user.firstName %><br/>
-			Last Name: <%= user.lastName %><br/>
-			Email: <%= user.email %>
+			<strong>First Name:</strong> <%= user.firstName %><br/>
+			<strong>Last Name:</strong> <%= user.lastName %><br/>
+			<strong>Email:</strong> <%= user.email %>
 		</p>
-		<p>Click on the Loans to view your information</p>
+
+		<br><br>
+		<p>Click to view your loan information.  
+			<a href="/loans" class="btn btn-info" role="button">Mortgage</a>
+		</p>
+
 		</div>
 	</div>
 <%- include footernavigator.ejs %>
