@@ -222,7 +222,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 
 router.get('/debtmarket', LoggedIn, function(req, res){
 
-	var pending = [], confirm = [], ongoing = [];
+	var pending1 = [], confirm1 = [], ongoing1 = [];
 	var loggedIn = logValue(req);
 
 	
@@ -233,7 +233,7 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 		}
 
 	console.log("ooooooo0o0o0o0");
-	pending = data;
+	pending1 = data;
 	});
 
 	marketCollection.find({'trader2' : req.user._id, 'status' : 'Pending'}, function(err, data) {
@@ -242,7 +242,7 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 			throw err;
 		}
 
-	confirm = data;
+	confirm1 = data;
 	});
 
 	marketCollection.find({'$or' : [{'trader1' : req.user._id}, {'trader2' : req.user._id}], 'status' : 'Ongoing'}, function(err, data) {
@@ -251,10 +251,10 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 			throw err;
 		}
 
-	ongoing = data;
+	ongoing1 = data;
 	});
 
-	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending, confirm: confirm, ongoing: ongoing});
+	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn, pending: pending1, confirm: confirm1, ongoing: ongoing1});
 		
 });
 
