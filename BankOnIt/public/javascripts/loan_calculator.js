@@ -1,29 +1,56 @@
 
 module.exports = {
 
-expected_loan_completion: function(start_date, interest_rate, payment, balance, period, type)
+expected_loan_completion: function(start_date, interest_rate, payment, balance, period, annuity_type, interest_type)
 {
-	console.log(start_date + " " + interest_rate + " " + payment + " " + balance + " " + period + " " + type);
+	console.log(start_date + " " + interest_rate + " " + payment + " " + balance + " " + period + " " + annuity_type);
 	var interest = 1 + interest_rate; 
 	var result;
 	var est_end_date;
 
-
-	if(type == 'Annuity')
+	if(interest_type == 'Compound')
 	{
-		var a = Math.log(1 - (interest_rate * balance)/(payment));
-		var b = Math.log(interest);
+		if(annuity_type == 'Annuity')
+		{
+			try
+			{
+				var a = Math.log(1 - (interest_rate * balance)/(payment));
+			}
+			catch (err)
+			{
+				return "N/A";
+			}
+			var b = Math.log(interest);
 
-		result = -1 * a/b;
+			result = -1 * a/b;
+		}
+
+		else if(annuity_type == "Annuity Due")
+		{
+			try
+			{
+				var a = Math.log(1 - (interest_rate * balance)/(payment * interest));
+			}
+			catch (err)
+			{
+				return "N/A";
+			}
+			var b = Math.log(interest);
+
+			result = -1 * a/b;
+		}
 	}
 
-	else if(type == "Annuity Due")
+	else if(interest_type == "Simple")
 	{
-		var a = Math.log(1 - (interest_rate * balance)/(payment * interest));
-		var b = Math.log(interest);
+		var a = balance * interest;
 
+		result = a / payment;
+	}
 
-		result = -1 * a/b;
+	else if(interest_type == "Flat")
+	{
+		result = balance / payment;
 	}
 
 	result = Math.ceil(result);
