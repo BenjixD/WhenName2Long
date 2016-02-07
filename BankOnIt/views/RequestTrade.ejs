@@ -31,7 +31,6 @@
                 </tr>
               </thread>
               <tbody>
-                <form action="/requestconfirm" method="POST">
                 <% for(var i=0; i<loans.length; i++) {%>
                   <tr>
                       <td><%= loans[i].userID %></td>
@@ -39,7 +38,7 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" name="buddy" value=<%= loans[i] %>>Trade</input></td>
+                      <td><a href="/requestconfirm/<%= loans[i]._id %>" class="btn btn-info" role="button"> Trade </a></td>
                   </tr>
                 <% } %>
                 </form>

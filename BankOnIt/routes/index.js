@@ -132,9 +132,6 @@ router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'
             successRedirect : '/successlogin',
             failureRedirect : '/'
         }));
-
-
-
 //
 
 
@@ -268,37 +265,50 @@ router.get('/debtmarket', LoggedIn, function(req, res){
 //PROBLEM****************
 //************Does NOT REDIRECT WHEN NOT LOGGED IN *************
 router.get('/requesttrade', LoggedIn, function(req, res) {
+
 	var loggedIn = logValue(req);
-	if (!loggedIn)
-		res.redirect('/');
-	else {
-			loanCollection.find({'product' : "Mortgage", 'userID': {'$ne': req.user._id}}, function(err, data) {
-				if(err){
-					console.log("get(requesttrade) find returns error");
-					throw err;
-				}
-				res.render('RequestTrade', {title: "Trade Request", loans: data , user: req.user, status: loggedIn});
-		});
-	}
+
+	loanCollection.find({'product' : "Mortgage", 'userID': {'$ne': req.user._id}}, function(err, data) {
+		if(err){
+			console.log("get(requesttrade) find returns error");
+			throw err;
+		}
+			res.render('RequestTrade', {title: "Trade Request", loans: data , user: req.user, status: loggedIn});
+	});
+	
 });
 
-router.post('/requestconfirm', function(req, res) {
-	if(req.user == null){
-		res.redirect('/');
-	}
-	else {
-		console.log("Requesting debt trade from: "+ req.user._id);
-		loanCollection.find({'product': 'Mortgage', 'userID': req.user._id}, function(err, data) {
-			if(err){
-				console.log("post(requesttrade) find returns error");
-				throw err;
-			}
-			// Render different page if can't make Request Trade do both things
-			res.render('RequestTrade', {title: "What to Trade For?", loan1: data, user: req.user, status: loggedIn, loan2: req.body.buddy})
-		})
-	}
-	
+router.get('/requestconfirm(/id/:id)?', LoggedIn, function(req, res) {
 
+	var loggedIn = logValue(req);
+	var tradeId = req.params.id;
+	console.log(tradeId);
+
+	console.log("Requesting debt trade from: "+ req.user._id);
+
+	loanCollection.find({'_id': tradeId}, function(err, traderLoan){
+
+		if(traderLoan == null){
+
+			console.log("This loan does not exist");
+			res.redirect('/');
+
+		}
+		else{
+
+			//find the trader loan with tradeId
+			loanCollection.find({'product': 'Mortgage', 'userID': req.user._id}, function(err, data) {
+				if(err){
+					console.log("post(requesttrade) find returns error");
+					throw err;
+				}
+				// Render different page if can't make Request Trade do both things
+				res.render('RequestConfirm', {title: "What to Trade For?", loan1: data, user: req.user, status: loggedIn, loan2: traderLoan});
+			});
+
+		}
+
+	});
 });
 
 router.post('/posttrade', function(req, res){
@@ -410,7 +420,7 @@ function LoggedIn(req, res, next) {
 	// Passport adds this method to request object. A middleware is allowed to add properties to
 	// request and response objects
 	if (req.isAuthenticated())
-		return next();s
+		return next();
 	// if the user is not authenticated then redirect him to the login page
 	res.redirect('/');
 }
