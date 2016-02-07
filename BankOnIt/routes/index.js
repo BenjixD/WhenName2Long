@@ -37,7 +37,7 @@ router.get('/loans', LoggedIn, function(req, res){
 	var loggedIn = logValue(req);
 	console.log(req.user._id);
 	
-	loanCollection.find({'userID': req.user._id, 'product': 'Mortgage Loans'}, function(err, data) {
+	loanCollection.find({'userID': req.user._id, 'product': 'Mortgage'}, function(err, data) {
 		
 			for(i = 0; i < data.length; i++){
 				// recalculate listofLoans' expectedEndDate
@@ -48,6 +48,7 @@ router.get('/loans', LoggedIn, function(req, res){
 			}
 
 	});
+	//console.log(mortgageLoans[0].name);
 	
 		loanCollection.find({'userID': req.user._id, 'product':'Car Loans'}, function(err, data) {
 		
@@ -193,7 +194,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	var ann_type = ['Annuity', 'Annuity Due'];
 	var fix_int = ['Yes', 'No'];
 	var freq = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
-	var loan_type = ['Mortgage Loans', 'Car Loans', 'Credit Card Loans', 'Others'];
+	var loan_type = ["Mortgage Loans", "Car Loans", "Credit Card Loans", "Others"];
 
 	res.render('newloan', { title: "Request Loan",
 							user: req.user,
@@ -201,7 +202,7 @@ router.get('/makeloan', LoggedIn, function(req, res){
 							at : ann_type, 
 							fi : fix_int,
 							fe : freq,
-							it : loan_type,
+							lt : loan_type,
 							status: loggedIn}); 
 	//res.redirect('/csc369');
 });
@@ -232,6 +233,7 @@ router.post('/makeloan', function (req, res){
 		
 		newloan.name = req.body.name;
 	    newloan.userID = req.user._id;
+	    newloan.product = req.body.product;
 	    newloan.interestType = req.body.interestType;
 	    newloan.interestRate = req.body.interestRate;
 	    newloan.annuityType = req.body.annuityType;
@@ -248,7 +250,7 @@ router.post('/makeloan', function (req, res){
 		newloan.lastPaymentDate= newloan.startDate;
 		newloan.currentBalance = newloan.total;
 		newloan.save();
-		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
+		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType, newloan.interestType);
 		newloan.save();
 		res.redirect("/loans");
 	});
