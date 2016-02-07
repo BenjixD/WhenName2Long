@@ -11,7 +11,7 @@
 <div id="container1">
 	<div class="jumbotron" id="body1">
 		<div class="panel-heading">
-            <h4 class="panel-title">
+            <h4 class="panel-title contanier">
               <a data-toggle="collapse" href="#collapse1">Mortgage Loans</a>   <!--NAMING-->
             </h4>
           </div>
@@ -30,6 +30,7 @@
                 </tr>
               </thread>
               <tbody>
+                <form action="/requestconfirm" method="POST">
                 <% for(var i=0; i<loans.length; i++) {%>
                   <tr>
                       <td><%= loans[i].userID %></td>
@@ -37,9 +38,10 @@
                       <td><%= loans[i].total %></td>
                       <td><%= loans[i].currentBalance %></td>
                       <td><%= loans[i].expectedEndDate %></td>
-                      <td><input type="button" class="btn btn-info" action="/requestconfirm" method="POST" value="Trade"></td>
+                      <td><input type="button" class="btn btn-info" value="Trade"></td>
                   </tr>
                 <% } %>
+                </form>
               </tbody>
             </table>
           </div>
