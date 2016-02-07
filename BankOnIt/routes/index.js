@@ -90,6 +90,18 @@ router.get('/loans', LoggedIn, function(req, res){
 
 //res.redirect('/csc369');
 });
+//load each specific loan page
+router.get('/loans(/id/:id)?', LoggedIn, function(req, res){
+
+	var loggedIn = logValue(req);
+	var id = req.params.id;
+	console.log(id);
+
+	loanCollection.findOne({'_id': id}, function(err, data){
+		res.render('loaninfo', { title: data.name, loans: data, user: req.user, status: loggedIn });
+	});
+
+});
 
 router.post('/loans', function(req, res){
 	console.log('went to loans');
@@ -207,9 +219,22 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	//res.redirect('/csc369');
 });
 
+
 router.get('/DebtMarket', LoggedIn, function(req, res){
 	var loggedIn = logValue(req);
 	res.render('DebtMarket', { title: 'Debt Market', user: req.user, status: loggedIn});
+});
+
+
+router.get('/trade', function(req, res) {
+	var loggedIn = logValue(req);
+	if (!loggedIn)
+		res.redirect('/');
+	else {
+		loanCollection.find({product : "Mortgage", userID: {$not: req.user._id}}, function(req, res) {
+
+		});
+	}
 });
 
 
@@ -254,6 +279,7 @@ router.post('/makeloan', function (req, res){
  		newloan.startDate = new Date().toDateString();
  		newloan.lastPaymentInterest = 0;
 		newloan.lastPaymentDate= newloan.startDate;
+		newloan.investmentIndex = 0;
 		newloan.currentBalance = newloan.total;
 		newloan.save();
 		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType, newloan.interestType);
