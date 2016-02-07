@@ -185,29 +185,42 @@ router.get('/logout', function(req,res){
 
 router.post('/makeloan', function (req, res){
 	console.log("Request to make new loan for UserID " + req.user._id);
-	var newloan = new Loans({
-		name : req.name,
-		status : "ongoing",
-	    userID : req.user._id,
-	    interestType : req.interestType,
-	    interestRate : req.interestRate,
-	    annuityType : req.annuityType,
-	    fixedInterest : req.fixedInterest,
-	    fees : req.fees,
-	    purpose : req.purpose,
- 		total : req.total,
- 		frequency : req.frequency,
- 		installmentSum : req.installmentSum,
- 		notes : req.notes,
- 		history : [],
- 		startDate : new Date().toDateString(),
- 		lastPaymentInterest : 0
- 	});
-	newloan.lastPaymentDate = newloan.startDate;
- 	newloan.currentBalance = newloan.total;
- 	newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
-	newloan.save();
-	res.redirect("/loans");
+	console.log(req.body.name);
+	console.log(req.body.interestType);
+	console.log(req.body.interestRate);
+	console.log(req.body.annuityType);
+	console.log(req.body.fixedInterest);
+	console.log(req.body.installmentSum);
+	console.log(req.body.fees);
+	console.log(req.body.total);
+	console.log(req.body.frequency);
+	console.log(req.body.notes);
+	console.log(req.body.purpose);
+	loanCollection.find({}, function(err, data){
+		
+		var newloan = new loanCollection();
+		
+		newloan.name = req.body.name;
+	    newloan.userID = req.user._id;
+	    newloan.interestType = req.body.interestType;
+	    newloan.interestRate = req.body.interestRate;
+	    newloan.annuityType = req.body.annuityType;
+	    newloan.fixedInterest = req.body.fixedInterest;
+	    newloan.installmentSum = req.body.installmentSum;
+		newloan.fees = req.body.fees;
+		newloan.total = req.body.total;
+ 		newloan.frequency = req.body.frequency;
+	    newloan.notes = req.body.notes;
+		newloan.purpose = req.body.purpose;
+ 		newloan.history = [];
+ 		newloan.startDate = new Date().toDateString();
+ 		newloan.lastPaymentInterest = 0;
+		newloan.lastPaymentDate= newloan.startDate;
+		newloan.currentBalance = newloan.total;
+		newloan.save();
+		newloan.expectedEndDate = calc.expected_loan_completion(new Date(newloan.lastPaymentDate), newloan.interestRate, newloan.installmentSum, newloan.currentBalance, newloan.frequency, newloan.annuityType);
+		newloan.save();
+	});
 
 });
 
