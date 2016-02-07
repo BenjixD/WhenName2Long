@@ -303,15 +303,18 @@ router.get('/requestconfirm(/id/:id)?', LoggedIn, function(req, res) {
 
 	});
 });
+//'/posttrade/ids/(:ids/:ids)?'
 
-router.post('/posttrade', function(req, res){
+router.post('/posttrade/ids/56b7755afebb5ece160cad5e/56b761a4d01dffe515a6065f', function(req, res){
+	console.log(req.originalUrl);
+	console.log(req.params.id);
 	if(req.user == null) {
 		console.log("Guest tried to enter /posttrade");
 		res.redirect('/');
 	}
 	else {
-		console.log('Registering trade of debts ' + req.body.loan1 + ", " + req.body.loan2);
-		marketCollection.find({'$or': [{'loan1' : req.body.loan1}, {'loan1' : req.body.loan2}, {'loan2' : req.body.loan1}, {'loan2' : req.body.loan2}]}, function(err, data) {
+		console.log('Registering trade of debts ' + '56b7755afebb5ece160cad5e' + ", " + '56b761a4d01dffe515a6065f');
+		marketCollection.find({'$or': [{'loan1' : '56b7755afebb5ece160cad5e'}, {'loan1' : '56b761a4d01dffe515a6065f'}],'$or' : [{'loan2' : '56b7755afebb5ece160cad5e'}, {'loan2' : '56b761a4d01dffe515a6065f'}]}, function(err, data) {
 			if(err) {
 				console.log("Error during debt trade registration");
 				throw err;
@@ -338,9 +341,9 @@ router.post('/posttrade', function(req, res){
 				res.redirect('/debtmarket');
 
 			}
-		})
+		});
 	}
-})
+});
 
 router.get('/logout', function(req,res){
 	req.logout();

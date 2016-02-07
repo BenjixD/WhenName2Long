@@ -31,16 +31,16 @@
               </thread>
               <tbody>
                 <% for(var i=0; i<loan1.length; i++) {%>
-                  <form action="/posttrade" method="POST">
                   <tr>
                       <td><%= loan1[i].userID %></td>
                       <td><%= loan1[i].name %></td>
                       <td><%= loan1[i].total %></td>
                       <td><%= loan1[i].currentBalance %></td>
-                      <td><%= loan1[i].expectedEndDate %></td> 
-                      <td><button type="submit" class="btn btn-success btn-md"> Confirm </button></td>                
+                      <td><%= loan1[i].expectedEndDate %></td>
+                      <form action="/posttrade/ids/<%= loan1[i]._id %>/<%= loan2._id %>" method="POST"> 
+                        <td><button type="submit" class="btn btn-success btn-md"> Confirm </button></td>                
+                      </form>
                   </tr>
-                </form>
                 <% } %>
               
               </tbody>
