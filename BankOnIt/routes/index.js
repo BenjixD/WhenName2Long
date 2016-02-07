@@ -219,16 +219,16 @@ router.get('/makeloan', LoggedIn, function(req, res){
 	//res.redirect('/csc369');
 });
 
-router.get('/trade', function(req, res) {
+router.get('/requesttrade', LoggedIn, function(req, res) {
 	var loggedIn = logValue(req);
 	if (!loggedIn)
 		res.redirect('/');
 	else {
-		loanCollection.find({product : "Mortgage", userID: {$not: req.user._id}}, function(req, res) {
-
-		})
+		loanCollection.find({product : "Mortgage", userID: {$not: req.user._id}}, function(err, data) {
+			res.render('', {title: "Trade Request", data: data , user: req.user, status: loggedIn});
+		});
 	}
-})
+});
 
 router.get('/logout', function(req,res){
 	req.logout();
